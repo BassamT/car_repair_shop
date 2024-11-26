@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Employee Login - Car Repair Shop{% endblock %}
+{% load static %}
+
+{% block content %}
+<section class="login-section py-5 text-white" style="background-image: url('{% static "repair_shop/images/login_bg.jpg" %}'); background-size: cover; background-position: center;">
+  <div class="overlay" style="background-color: rgba(0, 0, 0, 0.7); height: 100%; width: 100%; position: absolute; top: 0; left: 0;"></div>
+  <div class="container position-relative" style="z-index: 1;">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card bg-dark shadow-lg border-0 rounded-lg">
+          <div class="card-body py-5 px-4">
+            <h3 class="card-title text-center text-yellow mb-4">Employee Login</h3>
+            <form method="POST">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="username" class="text-yellow">Username</label>
+                <input type="text" id="username" name="username" class="form-control bg-dark text-white border-secondary" placeholder="Enter your username" required>
+              </div>
+              <div class="form-group mt-3">
+                <label for="password" class="text-yellow">Password</label>
+                <input type="password" id="password" name="password" class="form-control bg-dark text-white border-secondary" placeholder="Enter your password" required>
+              </div>
+              <button type="submit" class="btn btn-yellow btn-block mt-4">Login</button>
+            </form>
+            <div class="text-center mt-3">
+              <a href="#" class="text-yellow text-decoration-none">Forgot Password?</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

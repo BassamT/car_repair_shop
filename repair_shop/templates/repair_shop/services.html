@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Services - Car Repair Shop{% endblock %}
+
+{% block content %}
+<section class="services-section py-5 text-white" style="background-color: #121212;">
+  <div class="container">
+    <h1 class="text-center text-yellow mb-4">Our Services</h1>
+    <p class="text-center mb-5">Explore our wide range of services tailored to keep your vehicle in top condition.</p>
+
+    <div class="row">
+      <!-- Service 1 -->
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card bg-dark text-white h-100 shadow-sm">
+          <img src="{% static 'repair_shop/images/oil_change_icon.png' %}" class="card-img-top p-4" alt="Oil Change">
+          <div class="card-body">
+            <h5 class="card-title text-center text-yellow">Oil Change</h5>
+            <p class="card-text">Ensure your engine runs smoothly with regular oil changes using high-quality oil.</p>
+          </div>
+          <div class="card-footer text-center">
+            <a href="#" class="btn btn-yellow">Learn More</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service 2 -->
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card bg-dark text-white h-100 shadow-sm">
+          <img src="{% static 'repair_shop/images/tire_rotation_icon.png' %}" class="card-img-top p-4" alt="Tire Rotation">
+          <div class="card-body">
+            <h5 class="card-title text-center text-yellow">Tire Rotation</h5>
+            <p class="card-text">Maximize tire life and improve safety with professional tire rotation services.</p>
+          </div>
+          <div class="card-footer text-center">
+            <a href="#" class="btn btn-yellow">Learn More</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service 3 -->
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card bg-dark text-white h-100 shadow-sm">
+          <img src="{% static 'repair_shop/images/brake_service_icon.png' %}" class="card-img-top p-4" alt="Brake Inspection">
+          <div class="card-body">
+            <h5 class="card-title text-center text-yellow">Brake Inspection</h5>
+            <p class="card-text">Stay safe with comprehensive brake inspections and repairs.</p>
+          </div>
+          <div class="card-footer text-center">
+            <a href="#" class="btn btn-yellow">Learn More</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service 4 -->
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card bg-dark text-white h-100 shadow-sm">
+          <img src="{% static 'repair_shop/images/battery_check_icon.png' %}" class="card-img-top p-4" alt="Battery Replacement">
+          <div class="card-body">
+            <h5 class="card-title text-center text-yellow">Battery Replacement</h5>
+            <p class="card-text">Test and replace your car battery to ensure reliable performance.</p>
+          </div>
+          <div class="card-footer text-center">
+            <a href="#" class="btn btn-yellow">Learn More</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service 5 -->
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card bg-dark text-white h-100 shadow-sm">
+          <img src="{% static 'repair_shop/images/engine_diagnostic_icon.png' %}" class="card-img-top p-4" alt="Engine Diagnostics">
+          <div class="card-body">
+            <h5 class="card-title text-center text-yellow">Engine Diagnostics</h5>
+            <p class="card-text">Advanced diagnostics to identify and resolve engine issues efficiently.</p>
+          </div>
+          <div class="card-footer text-center">
+            <a href="#" class="btn btn-yellow">Learn More</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service 6 -->
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card bg-dark text-white h-100 shadow-sm">
+          <img src="{% static 'repair_shop/images/ac_service_icon.png' %}" class="card-img-top p-4" alt="A/C Maintenance">
+          <div class="card-body">
+            <h5 class="card-title text-center text-yellow">A/C Maintenance</h5>
+            <p class="card-text">Keep your car cool and comfortable with expert air conditioning service.</p>
+          </div>
+          <div class="card-footer text-center">
+            <a href="#" class="btn btn-yellow">Learn More</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service 7 -->
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card bg-dark text-white h-100 shadow-sm">
+          <img src="{% static 'repair_shop/images/wheel_alignment_icon.png' %}" class="card-img-top p-4" alt="Wheel Alignment">
+          <div class="card-body">
+            <h5 class="card-title text-center text-yellow">Wheel Alignment</h5>
+            <p class="card-text">Ensure your vehicle's wheels are perfectly aligned for a smooth ride.</p>
+          </div>
+          <div class="card-footer text-center">
+            <a href="#" class="btn btn-yellow">Learn More</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service 8 -->
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card bg-dark text-white h-100 shadow-sm">
+          <img src="{% static 'repair_shop/images/transmission_service_icon.png' %}" class="card-img-top p-4" alt="Transmission Service">
+          <div class="card-body">
+            <h5 class="card-title text-center text-yellow">Transmission Service</h5>
+            <p class="card-text">Comprehensive transmission repairs to maintain your car's performance.</p>
+          </div>
+          <div class="card-footer text-center">
+            <a href="#" class="btn btn-yellow">Learn More</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service 9 -->
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card bg-dark text-white h-100 shadow-sm">
+          <img src="{% static 'repair_shop/images/suspension_service_icon.png' %}" class="card-img-top p-4" alt="Suspension Repairs">
+          <div class="card-body">
+            <h5 class="card-title text-center text-yellow">Suspension Repairs</h5>
+            <p class="card-text">Fix suspension issues for a stable and comfortable driving experience.</p>
+          </div>
+          <div class="card-footer text-center">
+            <a href="#" class="btn btn-yellow">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

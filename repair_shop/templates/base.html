@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Car Repair Shop{% endblock %}</title>
+
+    <!-- Bootstrap CSS (Local) -->
+    <link rel="stylesheet" href="{% static 'repair_shop/css/bootstrap.min.css' %}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'repair_shop/css/styles.css' %}">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top custom-navbar">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
+                <img src="{% static 'repair_shop/images/logo.png' %}" alt="Car Repair Shop Logo" class="mr-2 logo">
+                <span class="brand-name text-yellow">Car Repair Shop</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'services' %}">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'customer_access_request' %}">Access Account</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'location' %}">Location</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main role="main" class="content" style="margin-top: 80px;">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer py-4">
+        <div class="container text-center">
+            <p>&copy; {% now "Y" %} Car Repair Shop. All rights reserved.</p>
+            <div class="social-icons mt-3">
+                <a href="#" class="text-yellow mx-2"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="text-yellow mx-2"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-yellow mx-2"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS (Local) -->
+    <script src="{% static 'repair_shop/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- Custom JS -->
+    <script src="{% static 'repair_shop/js/scripts.js' %}"></script>
+</body>
+</html>
