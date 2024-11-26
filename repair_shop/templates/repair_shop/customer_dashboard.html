@@ -1,16 +1,69 @@
-<!-- core/templates/core/customer_dashboard.html -->
+<!-- repair_shop/templates/repair_shop/customer_dashboard.html -->
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Your Dashboard - Car Repair Shop{% endblock %}
+
 {% block content %}
-<h2>Welcome, {{ customer.first_name }} {{ customer.last_name }}</h2>
-<h3>Your Invoices</h3>
-<ul>
-    {% for invoice in invoices %}
-        <li>
-            Invoice #{{ invoice.id }} - {{ invoice.invoice_date }} - ${{ invoice.total_amount }}
-            <a href="{% url 'invoice_detail' invoice.id %}">View Details</a>
-        </li>
-    {% empty %}
-        <li>No invoices found.</li>
-    {% endfor %}
-</ul>
+<div class="container py-5">
+    <h2 class="mb-4">Welcome, {{ customer.first_name }}!</h2>
+    
+    <!-- Customer Information -->
+    <h4>Your Information</h4>
+    <p>
+        <strong>Name:</strong> {{ customer.first_name }} {{ customer.last_name }}<br>
+        <strong>Email:</strong> {{ customer.email }}<br>
+        <strong>Phone:</strong> {{ customer.phone_number }}<br>
+        <strong>Address:</strong> {{ customer.address }}
+    </p>
+    
+    <!-- Vehicles -->
+    <h4>Your Vehicles</h4>
+    {% if vehicles %}
+    <div class="row">
+        {% for vehicle in vehicles %}
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">{{ vehicle.make }} {{ vehicle.model }} ({{ vehicle.year }})</h5>
+                    <p class="card-text">
+                        <strong>VIN:</strong> {{ vehicle.vin }}<br>
+                        <strong>License Plate:</strong> {{ vehicle.license_plate }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>You have no vehicles registered.</p>
+    {% endif %}
+    
+    <!-- Invoices -->
+    <h4>Your Invoices</h4>
+    {% if invoices %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Invoice ID</th>
+                <th>Date</th>
+                <th>Total Amount</th>
+                <th>Payment Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for invoice in invoices %}
+            <tr>
+                <td>{{ invoice.id }}</td>
+                <td>{{ invoice.invoice_date|date:"Y-m-d" }}</td>
+                <td>${{ invoice.total_amount }}</td>
+                <td>{{ invoice.payment_status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>You have no invoices.</p>
+    {% endif %}
+</div>
 {% endblock %}

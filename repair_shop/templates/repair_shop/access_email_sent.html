@@ -1,0 +1,17 @@
+<!-- repair_shop/templates/repair_shop/access_email_sent.html -->
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+
+{% block title %}Email Sent - Car Repair Shop{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="text-center mb-4">Email Sent</h2>
+    <p class="text-center">
+        An access link has been sent to {{ email }}.
+        Please check your inbox and click the link to access your dashboard.
+    </p>
+</div>
+{% endblock %}

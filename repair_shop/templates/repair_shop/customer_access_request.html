@@ -1,0 +1,21 @@
+<!-- repair_shop/templates/repair_shop/customer_access_request.html -->
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Access Your Account - Car Repair Shop{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="text-center mb-4">Access Your Account</h2>
+    <p class="text-center">Enter your email address to receive an access link.</p>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-primary btn-block">Send Access Link</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+<!-- repair_shop/templates/repair_shop/customer_list.html -->
+{% extends 'base.html' %}
+
+{% block title %}Customers - Car Repair Shop{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2>Customers</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <!-- Add more columns as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for customer in customers %}
+            <tr>
+                <td>{{ customer.first_name }} {{ customer.last_name }}</td>
+                <td>{{ customer.email }}</td>
+                <td>{{ customer.phone_number }}</td>
+                <!-- Add more columns as needed -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

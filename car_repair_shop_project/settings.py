@@ -62,8 +62,11 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'bassamtuffaha333@gmail.com'
-EMAIL_HOST_PASSWORD = '9753186420Bb'
-DEFAULT_FROM_EMAIL = 'bassamtuffaha333@gmail.com'
+EMAIL_HOST_PASSWORD = 'duhj biah hdyh pqwq'
+EMAIL_USE_TLS = True  # Use TLS for secure connection
+DEFAULT_FROM_EMAIL = 'Car Repair Shop <noreply@carrepairshop.com>'
+
+
 
 
 ROOT_URLCONF = 'car_repair_shop_project.urls'
@@ -149,4 +152,6 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+LOGIN_REDIRECT_URL = 'employee_dashboard'
 

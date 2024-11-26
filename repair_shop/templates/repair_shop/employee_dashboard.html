@@ -1,0 +1,16 @@
+<!-- repair_shop/templates/repair_shop/employee_dashboard.html -->
+{% extends 'base.html' %}
+
+{% block title %}Employee Dashboard - Car Repair Shop{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2>Welcome, {{ user.first_name }}!</h2>
+    <div class="list-group">
+        <a href="{% url 'add_customer' %}" class="list-group-item list-group-item-action">Add New Customer</a>
+        <a href="{% url 'add_vehicle' %}" class="list-group-item list-group-item-action">Add New Vehicle</a>
+        <a href="{% url 'add_service_part' %}" class="list-group-item list-group-item-action">Add New Service/Part</a>
+        <!-- Add more links as needed -->
+    </div>
+</div>
+{% endblock %}

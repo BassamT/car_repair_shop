@@ -242,3 +242,15 @@ a:hover {
     transform: translateY(-10px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
 }
+
+
+.navbar {
+    transition: all 0.3s ease;
+}
+.navbar.scrolled-up {
+    padding: 20px 0;
+}
+.navbar.scrolled-down {
+    padding: 10px 0;
+    background-color: rgba(0, 0, 0, 0.9);
+}

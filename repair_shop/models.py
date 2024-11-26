@@ -99,3 +99,5 @@ class AccessToken(models.Model):
 
     def is_valid(self):
         return self.created_at >= timezone.now() - timedelta(hours=1)
+
+

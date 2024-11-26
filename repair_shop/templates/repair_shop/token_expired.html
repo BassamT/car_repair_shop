@@ -1,0 +1,18 @@
+<!-- repair_shop/templates/repair_shop/token_expired.html -->
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}Link Expired - Car Repair Shop{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="text-center mb-4">Link Expired</h2>
+    <p class="text-center">
+        The access link you used has expired. Please request a new link.
+    </p>
+    <div class="text-center">
+        <a href="{% url 'customer_access_request' %}" class="btn btn-primary">Request New Link</a>
+    </div>
+</div>
+{% endblock %}

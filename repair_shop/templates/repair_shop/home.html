@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}Home - Car Repair Shop{% endblock %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 <!-- Hero Section -->
@@ -11,6 +12,7 @@
         <div class="mt-4">
             <a href="{% url 'services' %}" class="btn btn-yellow btn-lg mx-2">View Our Services</a>
             <a href="{% url 'contact' %}" class="btn btn-outline-yellow btn-lg mx-2">Contact Us</a>
+            <a href="{% url 'customer_access_request' %}" class="btn btn-outline-yellow btn-lg mx-2">Customer Access</a>
         </div>
     </div>
 </section>
@@ -61,8 +63,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Add more services here -->
         </div>
     </div>
 </section>
