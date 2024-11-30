@@ -1,6 +1,19 @@
 from django.db import models
 from django.utils import timezone
 from datetime import timedelta
+from django.contrib.auth.models import AbstractUser
+from django.conf import settings
+from decimal import Decimal
+import uuid
+
+class ActivityLog(models.Model):
+    employee = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    description = models.CharField(max_length=255)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.timestamp} - {self.description}"
+
 
 class Customer(models.Model):
     first_name = models.CharField(max_length=50)
@@ -8,8 +21,10 @@ class Customer(models.Model):
     phone_number = models.CharField(max_length=20)
     email = models.EmailField(unique=True)
     address = models.TextField()
-
     def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+    
+    def get_full_name(self):
         return f"{self.first_name} {self.last_name}"
 
 
@@ -42,7 +57,7 @@ class ServicePart(models.Model):
         return self.name
 
 
-from django.contrib.auth.models import AbstractUser
+
 
 class Employee(AbstractUser):
     ROLE_CHOICES = [
@@ -67,14 +82,19 @@ class Invoice(models.Model):
 
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='invoices')
     vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE, related_name='invoices')
-    employee = models.ForeignKey(Employee, on_delete=models.SET_NULL, null=True)
+    employee = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
     invoice_date = models.DateTimeField(auto_now_add=True)
-    total_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    total_amount = models.DecimalField(max_digits=10, decimal_places=2, default=Decimal('0.00'))
     payment_status = models.CharField(max_length=15, choices=PAYMENT_STATUS_CHOICES, default=UNPAID)
+    notes = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return f"Invoice {self.id} - {self.customer}"
+        return f"Invoice #{self.id} - {self.customer}"
 
+    def calculate_total(self):
+        total = sum(item.total_price for item in self.items.all())
+        self.total_amount = total
+        self.save()
 
 class InvoiceItem(models.Model):
     invoice = models.ForeignKey(Invoice, on_delete=models.CASCADE, related_name='items')
@@ -87,17 +107,24 @@ class InvoiceItem(models.Model):
         self.unit_price = self.service_part.unit_price
         self.total_price = self.unit_price * self.quantity
         super().save(*args, **kwargs)
+        # Update the invoice total amount
+        self.invoice.calculate_total()
 
     def __str__(self):
         return f"{self.service_part.name} x {self.quantity}"
 
 
+
 class AccessToken(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='access_tokens')
     token = models.CharField(max_length=64, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def is_valid(self):
-        return self.created_at >= timezone.now() - timedelta(hours=1)
+        # Token is valid for 1 hour
+        return timezone.now() - self.created_at < timedelta(hours=1)
+
+    def __str__(self):
+        return f"AccessToken(token={self.token}, customer={self.customer.email})"
 
 

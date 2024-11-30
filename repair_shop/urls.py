@@ -51,6 +51,23 @@ urlpatterns = [
     path('employee/password-reset-confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='repair_shop/password_reset_confirm.html'), name='password_reset_confirm'),
     path('employee/password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='repair_shop/password_reset_complete.html'), name='password_reset_complete'),
 
+    # Invoice URLs
+    path('employee/invoices/add/', views.add_invoice, name='add_invoice'),
+    path('employee/invoices/<int:pk>/', views.invoice_detail, name='invoice_detail'),
+    path('employee/invoices/', views.invoice_list, name='invoice_list'),
+
+    # Vehicle List URL
+    path('employee/vehicles/', views.vehicle_list, name='vehicle_list'),
+
+    path('employee/service-parts/add/', views.add_service_part, name='add_service_part'),
+
+    path('employee/service-parts/', views.service_part_list, name='service_part_list'),
+
+    # Customer Dashboard
+    path('customer/dashboard/<str:token>/', views.customer_dashboard, name='customer_dashboard'),
+    path('customer/dashboard/<str:token>/appointment/', views.customer_dashboard, name='request_appointment'),
+    path('customer/dashboard/<str:token>/support/', views.customer_dashboard, name='contact_support'),
+
     
 
     # Additional URL patterns for other views

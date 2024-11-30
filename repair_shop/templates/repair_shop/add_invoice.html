@@ -1,0 +1,84 @@
+<!-- repair_shop/templates/repair_shop/add_invoice.html -->
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}Create New Invoice - Car Repair Shop{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2>Create New Invoice</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="card mb-3">
+            <div class="card-header bg-primary text-white">
+                Invoice Details
+            </div>
+            <div class="card-body">
+                {{ form|crispy }}
+            </div>
+        </div>
+
+        <h3>Services and Parts</h3>
+        <div id="formset">
+            {{ formset.management_form }}
+            {% for form in formset.forms %}
+                <div class="card mb-3 formset-item">
+                    <div class="card-body">
+                        {{ form|crispy }}
+                        <button type="button" class="btn btn-danger remove-form mt-2">Remove</button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <!-- Hidden empty form template for cloning -->
+        <div id="empty-form" style="display: none;">
+            <div class="card mb-3 formset-item">
+                <div class="card-body">
+                    {{ formset.empty_form|crispy }}
+                    <button type="button" class="btn btn-danger remove-form mt-2">Remove</button>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-secondary mb-3" id="add-more">Add More Items</button>
+        <button type="submit" class="btn btn-success mb-3">Save Invoice</button>
+    </form>
+</div>
+
+<!-- Include jQuery if not already included -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<!-- Include Bootstrap JS if not already included -->
+<script src="{% static 'repair_shop/js/bootstrap.bundle.min.js' %}"></script>
+
+<script>
+    $(function() {
+        var formset = $('#formset');
+        var emptyFormHtml = $('#empty-form').html();
+        var totalForms = $('#id_items-TOTAL_FORMS');
+
+        $('#add-more').click(function() {
+            var formNum = parseInt(totalForms.val());
+            var newForm = emptyFormHtml.replace(/__prefix__/g, formNum);
+            formset.append(newForm);
+            totalForms.val(formNum + 1);
+        });
+
+        // Remove form
+        $(document).on('click', '.remove-form', function() {
+            $(this).closest('.formset-item').remove();
+            // Update total forms
+            var forms = $('.formset-item');
+            totalForms.val(forms.length);
+            // Reindex form prefixes
+            forms.each(function(index) {
+                $(this).find(':input').each(function() {
+                    var name = $(this).attr('name').replace(/items-\d+-/, 'items-' + index + '-');
+                    var id = 'id_' + name;
+                    $(this).attr({'name': name, 'id': id});
+                });
+            });
+        });
+    });
+</script>
+{% endblock %}

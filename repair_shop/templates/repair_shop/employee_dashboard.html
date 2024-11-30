@@ -1,16 +1,125 @@
 <!-- repair_shop/templates/repair_shop/employee_dashboard.html -->
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Employee Dashboard - Car Repair Shop{% endblock %}
 
 {% block content %}
 <div class="container py-5">
-    <h2>Welcome, {{ user.first_name }}!</h2>
-    <div class="list-group">
-        <a href="{% url 'add_customer' %}" class="list-group-item list-group-item-action">Add New Customer</a>
-        <a href="{% url 'add_vehicle' %}" class="list-group-item list-group-item-action">Add New Vehicle</a>
-        <a href="{% url 'add_service_part' %}" class="list-group-item list-group-item-action">Add New Service/Part</a>
-        <!-- Add more links as needed -->
+    <h2 class="mb-4">Welcome, {{ user.first_name }}!</h2>
+
+    <!-- Summary Cards -->
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-header">Customers</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ total_customers }}</h5>
+                    <p class="card-text">Total Customers</p>
+                    <a href="{% url 'customer_list' %}" class="btn btn-light btn-sm">View Customers</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-header">Vehicles</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ total_vehicles }}</h5>
+                    <p class="card-text">Total Vehicles</p>
+                    <a href="{% url 'vehicle_list' %}" class="btn btn-light btn-sm">View Vehicles</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-warning mb-3">
+                <div class="card-header">Invoices</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ total_invoices }}</h5>
+                    <p class="card-text">Total Invoices</p>
+                    <a href="{% url 'invoice_list' %}" class="btn btn-light btn-sm">View Invoices</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-header">Service Parts</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ total_service_parts }}</h5>
+                    <p class="card-text">Total Parts/Services</p>
+                    <a href="{% url 'service_part_list' %}" class="btn btn-light btn-sm">View Parts/Services</a>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <!-- Quick Actions -->
+    <h3 class="mt-5">Quick Actions</h3>
+    <div class="row">
+        <div class="col-md-3">
+            <a href="{% url 'add_customer' %}" class="text-decoration-none">
+                <div class="card text-center mb-3">
+                    <div class="card-body">
+                        <i class="fas fa-user-plus fa-2x mb-2"></i>
+                        <h5 class="card-title">Add New Customer</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="{% url 'add_vehicle' %}" class="text-decoration-none">
+                <div class="card text-center mb-3">
+                    <div class="card-body">
+                        <i class="fas fa-car fa-2x mb-2"></i>
+                        <h5 class="card-title">Add New Vehicle</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="{% url 'add_invoice' %}" class="text-decoration-none">
+                <div class="card text-center mb-3">
+                    <div class="card-body">
+                        <i class="fas fa-file-invoice-dollar fa-2x mb-2"></i>
+                        <h5 class="card-title">Create New Invoice</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="{% url 'add_service_part' %}" class="text-decoration-none">
+                <div class="card text-center mb-3">
+                    <div class="card-body">
+                        <i class="fas fa-tools fa-2x mb-2"></i>
+                        <h5 class="card-title">Create New Part/Service</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Recent Activities (Optional) -->
+    <h3 class="mt-5">Recent Activities</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Activity</th>
+                <th>Employee</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for activity in recent_activities %}
+            <tr>
+                <td>{{ activity.timestamp|date:"Y-m-d H:i" }}</td>
+                <td>{{ activity.description }}</td>
+                <td>{{ activity.employee.get_full_name }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No recent activities.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}

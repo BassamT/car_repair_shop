@@ -1,0 +1,9 @@
+Support Message from {{ customer.get_full_name }}
+
+Customer Details:
+Name: {{ customer.get_full_name }}
+Email: {{ customer.email }}
+Phone: {{ customer.phone_number }}
+
+Message:
+{{ message }}

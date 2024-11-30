@@ -1,69 +1,238 @@
 <!-- repair_shop/templates/repair_shop/customer_dashboard.html -->
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 {% block title %}Your Dashboard - Car Repair Shop{% endblock %}
 
 {% block content %}
 <div class="container py-5">
     <h2 class="mb-4">Welcome, {{ customer.first_name }}!</h2>
-    
-    <!-- Customer Information -->
-    <h4>Your Information</h4>
-    <p>
-        <strong>Name:</strong> {{ customer.first_name }} {{ customer.last_name }}<br>
-        <strong>Email:</strong> {{ customer.email }}<br>
-        <strong>Phone:</strong> {{ customer.phone_number }}<br>
-        <strong>Address:</strong> {{ customer.address }}
-    </p>
-    
-    <!-- Vehicles -->
-    <h4>Your Vehicles</h4>
-    {% if vehicles %}
-    <div class="row">
-        {% for vehicle in vehicles %}
-        <div class="col-md-6">
+
+    <!-- Display Messages -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <!-- Dashboard Navigation -->
+    <ul class="nav nav-tabs mb-4" id="dashboardTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="overview-tab" data-toggle="tab" href="#overview" role="tab">
+                <i class="fas fa-user"></i> Overview
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="vehicles-tab" data-toggle="tab" href="#vehicles" role="tab">
+                <i class="fas fa-car"></i> Your Vehicles
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="invoices-tab" data-toggle="tab" href="#invoices" role="tab">
+                <i class="fas fa-file-invoice-dollar"></i> Your Invoices
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="appointment-tab" data-toggle="tab" href="#appointment" role="tab">
+                <i class="fas fa-calendar-check"></i> Request Appointment
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="support-tab" data-toggle="tab" href="#support" role="tab">
+                <i class="fas fa-headset"></i> Contact Support
+            </a>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="dashboardTabContent">
+        <!-- Overview Tab -->
+        <div class="tab-pane fade show active" id="overview" role="tabpanel">
+            <!-- Customer Information -->
             <div class="card mb-4">
+                <div class="card-header">
+                    Your Information
+                </div>
                 <div class="card-body">
-                    <h5 class="card-title">{{ vehicle.make }} {{ vehicle.model }} ({{ vehicle.year }})</h5>
-                    <p class="card-text">
-                        <strong>VIN:</strong> {{ vehicle.vin }}<br>
-                        <strong>License Plate:</strong> {{ vehicle.license_plate }}
+                    <p>
+                        <strong>Name:</strong> {{ customer.first_name }} {{ customer.last_name }}<br>
+                        <strong>Email:</strong> {{ customer.email }}<br>
+                        <strong>Phone:</strong> {{ customer.phone_number }}<br>
+                        <strong>Address:</strong> {{ customer.address }}
                     </p>
                 </div>
             </div>
         </div>
-        {% endfor %}
+
+        <!-- Vehicles Tab -->
+        <div class="tab-pane fade" id="vehicles" role="tabpanel">
+            <h4>Your Vehicles</h4>
+            {% if vehicles %}
+            <div class="row">
+                {% for vehicle in vehicles %}
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ vehicle.make }} {{ vehicle.model }} ({{ vehicle.year }})</h5>
+                            <p class="card-text">
+                                <strong>VIN:</strong> {{ vehicle.vin }}<br>
+                                <strong>License Plate:</strong> {{ vehicle.license_plate }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p>You have no vehicles registered.</p>
+            {% endif %}
+        </div>
+
+        <!-- Invoices Tab -->
+        <div class="tab-pane fade" id="invoices" role="tabpanel">
+            <h4>Your Invoices</h4>
+            {% if invoices %}
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Invoice ID</th>
+                        <th>Date</th>
+                        <th>Total Amount</th>
+                        <th>Payment Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for invoice in invoices %}
+                    <tr>
+                        <td>{{ invoice.id }}</td>
+                        <td>{{ invoice.invoice_date|date:"Y-m-d" }}</td>
+                        <td>${{ invoice.total_amount }}</td>
+                        <td>{{ invoice.payment_status }}</td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#invoiceModal{{ invoice.id }}">View Details</button>
+                        </td>
+                    </tr>
+
+                    <!-- Invoice Modal -->
+                    <div class="modal fade" id="invoiceModal{{ invoice.id }}" tabindex="-1" role="dialog" aria-labelledby="invoiceModalLabel{{ invoice.id }}" aria-hidden="true">
+                      <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content text-dark">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="invoiceModalLabel{{ invoice.id }}">Invoice #{{ invoice.id }} Details</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <p><strong>Date:</strong> {{ invoice.invoice_date|date:"Y-m-d H:i" }}</p>
+                            <p><strong>Vehicle:</strong> {{ invoice.vehicle }}</p>
+                            <h5>Services and Parts</h5>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Description</th>
+                                        <th>Quantity</th>
+                                        <th>Unit Price</th>
+                                        <th>Total Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in invoice.items.all %}
+                                    <tr>
+                                        <td>{{ item.service_part.name }}</td>
+                                        <td>{{ item.quantity }}</td>
+                                        <td>${{ item.unit_price }}</td>
+                                        <td>${{ item.total_price }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <h5>Total Amount: ${{ invoice.total_amount }}</h5>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p>You have no invoices.</p>
+            {% endif %}
+        </div>
+
+        <!-- Appointment Request Tab -->
+        <div class="tab-pane fade" id="appointment" role="tabpanel">
+            <h4>Request an Appointment</h4>
+            <form method="post" action="{% url 'customer_dashboard' token=token %}">
+                {% csrf_token %}
+                <!-- Hidden field to identify the form -->
+                <input type="hidden" name="appointment_form" value="1">
+                <div class="form-group">
+                    <label for="vehicle">Select Vehicle</label>
+                    <select class="form-control" id="vehicle" name="vehicle">
+                        {% for vehicle in vehicles %}
+                        <option value="{{ vehicle.id }}">{{ vehicle.make }} {{ vehicle.model }} ({{ vehicle.year }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="preferred_date">Preferred Date</label>
+                    <input type="date" class="form-control" id="preferred_date" name="preferred_date" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Additional Details</label>
+                    <textarea class="form-control" id="message" name="message" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-success">Submit Request</button>
+            </form>
+        </div>
+
+        <!-- Contact Support Tab -->
+        <div class="tab-pane fade" id="support" role="tabpanel">
+            <h4>Contact Support</h4>
+            <form method="post" action="{% url 'customer_dashboard' token=token %}">
+                {% csrf_token %}
+                <!-- Hidden field to identify the form -->
+                <input type="hidden" name="support_form" value="1">
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" class="form-control" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Your Message</label>
+                    <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
     </div>
-    {% else %}
-    <p>You have no vehicles registered.</p>
-    {% endif %}
-    
-    <!-- Invoices -->
-    <h4>Your Invoices</h4>
-    {% if invoices %}
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Invoice ID</th>
-                <th>Date</th>
-                <th>Total Amount</th>
-                <th>Payment Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for invoice in invoices %}
-            <tr>
-                <td>{{ invoice.id }}</td>
-                <td>{{ invoice.invoice_date|date:"Y-m-d" }}</td>
-                <td>${{ invoice.total_amount }}</td>
-                <td>{{ invoice.payment_status }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
-    <p>You have no invoices.</p>
-    {% endif %}
 </div>
+
+<!-- Include jQuery and Bootstrap JS for tabs and modal functionality -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="{% static 'repair_shop/js/bootstrap.bundle.min.js' %}"></script>
+
+<script>
+    $(function () {
+        $('#dashboardTab a').on('click', function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+
+        // Activate tab based on URL hash
+        var hash = window.location.hash;
+        if (hash) {
+            $('#dashboardTab a[href="' + hash + '"]').tab('show');
+        }
+    });
+</script>
 {% endblock %}

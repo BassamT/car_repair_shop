@@ -1,8 +1,8 @@
 # repair_shop/forms.py
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
-from .models import Customer
-from django.forms import ModelForm
+from .models import Customer, Invoice, InvoiceItem
+from django.forms import ModelForm, inlineformset_factory
 from .models import Vehicle
 from .models import ServicePart
 
@@ -36,3 +36,25 @@ class ServicePartForm(ModelForm):
         model = ServicePart
         fields = '__all__'
 
+
+class InvoiceForm(forms.ModelForm):
+    class Meta:
+        model = Invoice
+        fields = ['customer', 'vehicle', 'notes']
+
+InvoiceItemFormSet = inlineformset_factory(
+    Invoice,
+    InvoiceItem,
+    fields=['service_part', 'quantity'],
+    extra=1,
+    can_delete=True,
+    widgets={
+        'quantity': forms.NumberInput(attrs={'min': '1'}),
+    }
+)
+
+
+class ServicePartForm(forms.ModelForm):
+    class Meta:
+        model = ServicePart
+        fields = ['name', 'description', 'unit_price']

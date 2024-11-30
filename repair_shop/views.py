@@ -6,7 +6,7 @@ from django.utils.crypto import get_random_string
 from django.utils import timezone
 from django.contrib.auth.views import LoginView
 from .forms import EmailAuthenticationForm, CustomerAccessForm
-from .models import Customer, AccessToken, ServicePart, Invoice
+from .models import Customer, AccessToken, ServicePart, Invoice, Vehicle, ActivityLog
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 import uuid
@@ -15,6 +15,14 @@ from django.shortcuts import redirect
 from .forms import CustomerForm
 from .forms import VehicleForm
 from .forms import ServicePartForm
+from .forms import InvoiceForm, InvoiceItemFormSet
+from .forms import CustomerAccessForm
+from django.template.loader import render_to_string
+from django.conf import settings
+from django.contrib import messages
+from datetime import timedelta
+
+
 
 # class EmployeeLoginView(LoginView):
 #     template_name = 'repair_shop/employee_login.html'  # Updated template path
@@ -23,41 +31,6 @@ from .forms import ServicePartForm
 #         context = super().get_context_data(**kwargs)
 #         context['title'] = 'Employee Login'
 #         return context
-
-def customer_access_request(request):
-    if request.method == 'POST':
-        form = EmailAuthenticationForm(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data['email']
-            try:
-                customer = Customer.objects.get(email=email)
-                token = get_random_string(32)
-                AccessToken.objects.create(customer=customer, token=token)
-                access_link = request.build_absolute_uri(f'/customer/access/{token}/')
-                send_mail(
-                    'Your Access Link',
-                    f'Click the link to access your account: {access_link}',
-                    'noreply@carrepairshop.com',
-                    [email],
-                )
-                return render(request, 'repair_shop/access_sent.html')  # Updated template path
-            except Customer.DoesNotExist:
-                form.add_error('email', 'Email not found.')
-    else:
-        form = EmailAuthenticationForm()
-    return render(request, 'repair_shop/customer_access.html', {'form': form})  # Updated template path
-
-def customer_dashboard(request, token):
-    try:
-        access_token = AccessToken.objects.get(token=token)
-        if access_token.is_valid():
-            customer = access_token.customer
-            invoices = customer.invoices.all()
-            return render(request, 'repair_shop/customer_dashboard.html', {'customer': customer, 'invoices': invoices})  # Updated template path
-        else:
-            return render(request, 'repair_shop/access_expired.html')  # Updated template path
-    except AccessToken.DoesNotExist:
-        return render(request, 'repair_shop/invalid_token.html')  # Updated template path
 
 def services(request):
     services = ServicePart.objects.filter(type='Service')
@@ -76,24 +49,29 @@ def contact(request):
 def location(request):
     return render(request, 'repair_shop/location.html')
 
-
 def customer_access_request(request):
+    """
+    Handles customer access requests by sending an access link via email.
+    """
     if request.method == 'POST':
         form = CustomerAccessForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data['email']
             try:
                 customer = Customer.objects.get(email=email)
-                # Generate a unique token
-                token_str = uuid.uuid4().hex
-                token = AccessToken.objects.create(customer=customer, token=token_str)
-
-                # Build the access link
+                
+                # Generate a unique token using UUID4
+                token = uuid.uuid4().hex
+                
+                # Create an AccessToken object
+                AccessToken.objects.create(customer=customer, token=token)
+                
+                # Build the access link pointing to the customer_dashboard view with the token
                 access_link = request.build_absolute_uri(
-                    reverse('customer_dashboard', args=[token.token])
+                    reverse('customer_dashboard', args=[token])
                 )
-
-                # Send email to customer
+                
+                # Prepare email content
                 subject = 'Your Access Link to Car Repair Shop'
                 message = f"""
                 Dear {customer.first_name},
@@ -106,47 +84,138 @@ def customer_access_request(request):
                 Best regards,
                 Car Repair Shop Team
                 """
+                
+                # Send the email
                 send_mail(
                     subject,
                     message,
-                    None,  # Use DEFAULT_FROM_EMAIL
+                    settings.DEFAULT_FROM_EMAIL,  # Ensure DEFAULT_FROM_EMAIL is set in settings.py
                     [customer.email],
                     fail_silently=False,
                 )
+                
+                # Provide feedback to the user
+                messages.success(request, f'Access link has been sent to {email}.')
                 return render(request, 'repair_shop/access_email_sent.html', {'email': email})
             except Customer.DoesNotExist:
                 form.add_error('email', 'No customer with this email found.')
     else:
         form = CustomerAccessForm()
+    
     return render(request, 'repair_shop/customer_access_request.html', {'form': form})
 
-# repair_shop/views.py
 
+def authenticate_customer(token):
+    """
+    Authenticates a customer using the provided token.
+    Returns the Customer object if valid and not expired; otherwise, returns None.
+    """
+    try:
+        access_token = AccessToken.objects.get(token=token)
+        
+        # Check if the token is still valid (e.g., valid for 1 hour)
+        if access_token.is_valid():
+            return access_token.customer
+        else:
+            # Optionally, delete expired tokens
+            access_token.delete()
+            return None
+    except AccessToken.DoesNotExist:
+        return None
 
 
 def customer_dashboard(request, token):
-    access_token = get_object_or_404(AccessToken, token=token)
-    if access_token.is_valid():
-        customer = access_token.customer
-        vehicles = customer.vehicles.all()
-        invoices = customer.invoices.all()
-        return render(request, 'repair_shop/customer_dashboard.html', {
-            'customer': customer,
-            'vehicles': vehicles,
-            'invoices': invoices,
-        })
-    else:
-        return render(request, 'repair_shop/token_expired.html')
+    """
+    Displays the customer dashboard if the provided token is valid.
+    Handles appointment requests and support messages.
+    """
+    # Authenticate customer using the token
+    customer = authenticate_customer(token)
+    if not customer:
+        messages.error(request, 'Invalid or expired access token. Please request a new access link.')
+        return redirect('customer_access_request')
+
+    # Fetch customer-related data
+    vehicles = customer.vehicles.all()
+    invoices = customer.invoices.all()
+
+    if request.method == 'POST':
+        if 'appointment_form' in request.POST:
+            # Appointment Request Form Submission
+            vehicle_id = request.POST.get('vehicle')
+            preferred_date = request.POST.get('preferred_date')
+            message_text = request.POST.get('message', '')
+            try:
+                vehicle = Vehicle.objects.get(id=vehicle_id, customer=customer)
+            except Vehicle.DoesNotExist:
+                messages.error(request, 'Selected vehicle does not exist.')
+                return redirect('customer_dashboard', token=token)
+
+            # Prepare email content
+            subject = f"Appointment Request from {customer.first_name} {customer.last_name}"
+            email_message = render_to_string('repair_shop/appointment_email.txt', {
+                'customer': customer,
+                'vehicle': vehicle,
+                'preferred_date': preferred_date,
+                'message': message_text,
+            })
+
+            # Send email
+            send_mail(
+                subject,
+                email_message,
+                settings.DEFAULT_FROM_EMAIL,
+                [settings.SHOP_EMAIL],  # Ensure SHOP_EMAIL is set in settings.py
+            )
+
+            # Provide feedback to the user
+            messages.success(request, 'Your appointment request has been submitted.')
+            # Redirect to avoid resubmission
+            return redirect('customer_dashboard', token=token)
+        
+        elif 'support_form' in request.POST:
+            # Contact Support Form Submission
+            subject_text = request.POST.get('subject')
+            message_text = request.POST.get('message')
+            if not subject_text or not message_text:
+                messages.error(request, 'Please provide both a subject and a message.')
+                return redirect('customer_dashboard', token=token)
+
+            # Prepare email content
+            email_subject = f"Support Message from {customer.first_name} {customer.last_name}: {subject_text}"
+            email_message = render_to_string('repair_shop/support_email.txt', {
+                'customer': customer,
+                'message': message_text,
+            })
+
+            # Send email
+            send_mail(
+                email_subject,
+                email_message,
+                settings.DEFAULT_FROM_EMAIL,
+                [settings.SHOP_EMAIL],
+            )
+
+            # Provide feedback to the user
+            messages.success(request, 'Your message has been sent to our support team.')
+            # Redirect to avoid resubmission
+            return redirect('customer_dashboard', token=token)
+    
+    context = {
+        'customer': customer,
+        'vehicles': vehicles,
+        'invoices': invoices,
+        'token': token,
+    }
+    return render(request, 'repair_shop/customer_dashboard.html', context)
+
+
 
 
 class EmployeeLoginView(LoginView):
     template_name = 'repair_shop/employee_login.html'
     authentication_form = EmployeeLoginForm
 
-
-@login_required
-def employee_dashboard(request):
-    return render(request, 'repair_shop/employee_dashboard.html')
 
 
 
@@ -193,7 +262,86 @@ def customer_list(request):
     return render(request, 'repair_shop/customer_list.html', {'customers': customers})
 
 
+
 @login_required
 def employee_dashboard(request):
-    return render(request, 'repair_shop/employee_dashboard.html')
+    total_customers = Customer.objects.count()
+    total_vehicles = Vehicle.objects.count()
+    total_invoices = Invoice.objects.count()
+    total_service_parts = ServicePart.objects.count()
+    recent_activities = ActivityLog.objects.order_by('-timestamp')[:5]
 
+    context = {
+        'total_customers': total_customers,
+        'total_vehicles': total_vehicles,
+        'total_invoices': total_invoices,
+        'total_service_parts': total_service_parts,
+        'recent_activities': recent_activities,
+    }
+    return render(request, 'repair_shop/employee_dashboard.html', context)
+
+
+@login_required
+def invoice_detail(request, pk):
+    invoice = Invoice.objects.get(pk=pk)
+    return render(request, 'repair_shop/invoice_detail.html', {'invoice': invoice})
+
+
+@login_required
+def invoice_list(request):
+    invoices = Invoice.objects.order_by('-invoice_date')
+    return render(request, 'repair_shop/invoice_list.html', {'invoices': invoices})
+
+
+@login_required
+def add_invoice(request):
+    if request.method == 'POST':
+        form = InvoiceForm(request.POST)
+        formset = InvoiceItemFormSet(request.POST)
+        if form.is_valid() and formset.is_valid():
+            invoice = form.save(commit=False)
+            invoice.employee = request.user
+            invoice.save()
+            formset.instance = invoice
+            formset.save()
+            invoice.calculate_total()
+
+            # Log the activity
+            ActivityLog.objects.create(
+                employee=request.user,
+                description=f"Created Invoice #{invoice.id} for {invoice.customer}"
+            )
+
+            return redirect('invoice_detail', pk=invoice.id)
+    else:
+        form = InvoiceForm()
+        formset = InvoiceItemFormSet(request.POST or None, prefix='items')
+    return render(request, 'repair_shop/add_invoice.html', {'form': form, 'formset': formset})
+
+@login_required
+def vehicle_list(request):
+    vehicles = Vehicle.objects.all()
+    return render(request, 'repair_shop/vehicle_list.html', {'vehicles': vehicles})
+
+
+@login_required
+def add_service_part(request):
+    if request.method == 'POST':
+        form = ServicePartForm(request.POST)
+        if form.is_valid():
+            service_part = form.save()
+            # Log the activity
+            ActivityLog.objects.create(
+                employee=request.user,
+                description=f"Added new service/part: {service_part.name}"
+            )
+            return redirect('service_part_list')  # Redirect to a list of service parts
+    else:
+        form = ServicePartForm()
+    return render(request, 'repair_shop/add_service_part.html', {'form': form})
+
+
+@login_required
+def service_part_list(request):
+    service_parts = ServicePart.objects.all()
+    return render(request, 'repair_shop/service_part_list.html', {'service_parts': service_parts})

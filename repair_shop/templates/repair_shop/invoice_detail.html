@@ -1,0 +1,42 @@
+<!-- repair_shop/templates/repair_shop/invoice_detail.html -->
+{% extends 'base.html' %}
+
+{% block title %}Invoice #{{ invoice.id }} - Car Repair Shop{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2>Invoice #{{ invoice.id }}</h2>
+    <p><strong>Date:</strong> {{ invoice.invoice_date|date:"Y-m-d H:i" }}</p>
+    <p><strong>Customer:</strong> {{ invoice.customer.get_full_name }}</p>
+    <p><strong>Vehicle:</strong> {{ invoice.vehicle }}</p>
+    <p><strong>Notes:</strong> {{ invoice.notes|default:"None" }}</p>
+
+    <h3>Services and Parts</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in invoice.items.all %}
+            <tr>
+                <td>{{ item.service_part.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>${{ item.unit_price }}</td>
+                <td>${{ item.total_price }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No services or parts added to this invoice.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h4>Total Amount: ${{ invoice.total_amount }}</h4>
+</div>
+{% endblock %}

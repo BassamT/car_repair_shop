@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="{% static 'repair_shop/css/styles.css' %}">
     <!-- Google Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
 <body class="bg-dark text-white">
     <!-- Navbar -->
@@ -28,17 +30,68 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'home' %}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'services' %}active{% endif %}" href="{% url 'services' %}">Services</a></li>
-                    <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" href="{% url 'contact' %}">Contact Us</a></li>
-                    <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'location' %}active{% endif %}" href="{% url 'location' %}">Location</a></li>
-                    <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'customer_access_request' %}active{% endif %}" href="{% url 'customer_access_request' %}">Customer Access</a></li>
+                    <!-- Common Navigation Links -->
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'home' %}">
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'services' %}active{% endif %}" href="{% url 'services' %}">
+                            Services
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" href="{% url 'contact' %}">
+                            Contact Us
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'location' %}active{% endif %}" href="{% url 'location' %}">
+                            Location
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'customer_access_request' %}active{% endif %}" href="{% url 'customer_access_request' %}">
+                            Customer Access
+                        </a>
+                    </li>
                     
                     {% if user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'employee_dashboard' %}active{% endif %}" href="{% url 'employee_dashboard' %}">Dashboard</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'employee_logout' %}">Logout</a></li>
+                        <!-- Employee Navigation Links -->
+                        <li class="nav-item dropdown">
+                            <!-- Modify the href to link to 'employee_dashboard' -->
+                            <a class="nav-link dropdown-toggle {% if request.resolver_match.url_name|slice:":9" == 'employee_' or request.resolver_match.url_name|slice:":4" == 'add_' or request.resolver_match.url_name|slice:"-5:" == '_list' %}active{% endif %}" href="{% url 'employee_dashboard' %}" id="navbarDropdown" role="button" data-toggle="dropdown">
+                                Dashboard
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{% url 'employee_dashboard' %}">
+                                    <i class="fas fa-tachometer-alt"></i> Dashboard Home
+                                </a>
+                                <a class="dropdown-item" href="{% url 'customer_list' %}">
+                                    <i class="fas fa-users"></i> Customers
+                                </a>
+                                <a class="dropdown-item" href="{% url 'vehicle_list' %}">
+                                    <i class="fas fa-car"></i> Vehicles
+                                </a>
+                                <a class="dropdown-item" href="{% url 'invoice_list' %}">
+                                    <i class="fas fa-file-invoice-dollar"></i> Invoices
+                                </a>
+                                <!-- Add more links as needed -->
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'employee_logout' %}">
+                                Logout
+                            </a>
+                        </li>
                     {% else %}
-                        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'employee_login' %}active{% endif %}" href="{% url 'employee_login' %}">Employee Login</a></li>
+                        <!-- Login Link -->
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.resolver_match.url_name == 'employee_login' %}active{% endif %}" href="{% url 'employee_login' %}">
+                                Employee Login
+                            </a>
+                        </li>
                     {% endif %}
                 </ul>
             </div>

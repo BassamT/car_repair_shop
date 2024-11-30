@@ -1,0 +1,33 @@
+<!-- repair_shop/templates/repair_shop/service_part_list.html -->
+{% extends 'base.html' %}
+
+{% block title %}Service Parts - Car Repair Shop{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2>Service Parts</h2>
+    <a href="{% url 'add_service_part' %}" class="btn btn-primary mb-3">Add New Part/Service</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Unit Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for part in service_parts %}
+            <tr>
+                <td>{{ part.name }}</td>
+                <td>{{ part.description }}</td>
+                <td>${{ part.unit_price }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No service parts found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -65,7 +65,7 @@ EMAIL_HOST_USER = 'bassamtuffaha333@gmail.com'
 EMAIL_HOST_PASSWORD = 'duhj biah hdyh pqwq'
 EMAIL_USE_TLS = True  # Use TLS for secure connection
 DEFAULT_FROM_EMAIL = 'Car Repair Shop <noreply@carrepairshop.com>'
-
+SHOP_EMAIL = 'bassamtuffaha333@gmail.com'
 
 
 
