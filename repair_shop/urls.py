@@ -68,6 +68,7 @@ urlpatterns = [
     path('customer/dashboard/<str:token>/appointment/', views.customer_dashboard, name='request_appointment'),
     path('customer/dashboard/<str:token>/support/', views.customer_dashboard, name='contact_support'),
 
+
     
 
     # Additional URL patterns for other views

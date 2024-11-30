@@ -58,3 +58,32 @@ class ServicePartForm(forms.ModelForm):
     class Meta:
         model = ServicePart
         fields = ['name', 'description', 'unit_price']
+
+
+class ContactForm(forms.Form):
+    name = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control bg-dark text-white border-secondary',
+            'placeholder': 'Your Name',
+            'id': 'name',
+        }),
+        label='Name'
+    )
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={
+            'class': 'form-control bg-dark text-white border-secondary',
+            'placeholder': 'Your Email',
+            'id': 'email',
+        }),
+        label='Email'
+    )
+    message = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'class': 'form-control bg-dark text-white border-secondary',
+            'placeholder': 'Your Message',
+            'rows': 5,
+            'id': 'message',
+        }),
+        label='Message'
+    )

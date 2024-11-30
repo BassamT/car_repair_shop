@@ -2,44 +2,43 @@
 {% block title %}Location - Car Repair Shop{% endblock %}
 
 {% block content %}
-{% load crispy_forms_tags %}
-
 <!-- Location Section -->
 <section class="location-section py-5 text-white" style="background-color: #121212;">
-  <div class="container">
-    <h1 class="text-center mb-4">Our Location</h1>
-    <p class="text-center mb-5">Visit us at our service center or contact us for assistance.</p>
-    
-    <div class="row">
-      <!-- Location Info -->
-      <div class="col-md-6 text-center mb-4">
-        <i class="fas fa-map-marker-alt fa-3x text-primary mb-3"></i>
-        <h5>Address</h5>
-        <p>123 Main Street, Your City, Your Country</p>
-      </div>
-      <div class="col-md-6 text-center mb-4">
-        <i class="fas fa-clock fa-3x text-primary mb-3"></i>
-        <h5>Working Hours</h5>
-        <p>Mon-Fri: 8:00 AM - 6:00 PM<br>Sat: 9:00 AM - 3:00 PM</p>
-      </div>
-    </div>
-
-    <div class="row mt-5">
-      <!-- Google Map -->
-      <div class="col-md-12">
-        <h4 class="text-center">Find Us Here</h4>
-        <div class="map-container mt-4">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d4773.747564790172!2d35.2781153536854!3d32.21637380372532!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1732639780651!5m2!1sen!2s"
-            width="100%"
-            height="450"
-            style="border:0;"
-            allowfullscreen=""
-            loading="lazy">
-          </iframe>
+    <div class="container">
+        <h1 class="text-center mb-4 text-warning">Our Location</h1>
+        <p class="text-center mb-5">Visit us at our service center or contact us for assistance. We are here to help!</p>
+        
+        <div class="row">
+            <!-- Location Info -->
+            <div class="col-md-6 text-center mb-4">
+                <i class="fas fa-map-marker-alt fa-3x text-warning mb-3"></i>
+                <h5 class="text-warning">Address</h5>
+                <p>Main Street, Sabastia, Nablus, Palestine</p>
+            </div>
+            <div class="col-md-6 text-center mb-4">
+                <i class="fas fa-clock fa-3x text-warning mb-3"></i>
+                <h5 class="text-warning">Working Hours</h5>
+                <p>Mon-Fri: 8:00 AM - 6:00 PM<br>Sat: 9:00 AM - 3:00 PM</p>
+            </div>
         </div>
-      </div>
+
+        <div class="row mt-5">
+            <!-- Google Map -->
+            <div class="col-md-12">
+                <h4 class="text-center text-warning">Find Us Here</h4>
+                <div class="map-container mt-4">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d819.3172334717706!2d35.19378310308498!3d32.27690540981351!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1732933993262!5m2!1sen!2sus"
+                        width="100%"
+                        height="450"
+                        class="rounded shadow"
+                        style="border: 2px solid #ffc107;"
+                        allowfullscreen=""
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 {% endblock %}

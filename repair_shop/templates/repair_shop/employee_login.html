@@ -6,9 +6,8 @@
 {% block title %}Employee Login - Car Repair Shop{% endblock %}
 
 {% block content %}
-<section class="login-section py-5 text-white" style="background-image: url('{% static "repair_shop/images/login_bg.jpg" %}'); background-size: cover; background-position: center;">
-    <div class="overlay" style="background-color: rgba(0, 0, 0, 0.7); height: 100%; width: 100%; position: absolute; top: 0; left: 0;"></div>
-    <div class="container position-relative" style="z-index: 1;">
+<section class="login-section py-5 text-white" style="background-color: #121212;">
+    <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card bg-dark shadow-lg border-0 rounded-lg">
@@ -30,5 +29,17 @@
         </div>
     </div>
 </section>
-{% endblock %}
 
+<style>
+    .btn-yellow {
+        background-color: #ffc107;
+        color: #121212;
+        border: none;
+    }
+
+    .btn-yellow:hover {
+        background-color: #e0a800;
+        color: #ffffff;
+    }
+</style>
+{% endblock %}

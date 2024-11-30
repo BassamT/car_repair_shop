@@ -254,3 +254,30 @@ a:hover {
     padding: 10px 0;
     background-color: rgba(0, 0, 0, 0.9);
 }
+
+
+/* repair_shop/static/repair_shop/css/styles.css */
+
+/* Example definition for btn-yellow */
+.btn-yellow {
+    background-color: #FFC107; /* Bootstrap warning color */
+    color: #212529; /* Dark text for contrast */
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-yellow:hover {
+    background-color: #e0a800; /* Darker shade on hover */
+    color: #fff; /* White text on hover */
+}
+
+
+.btn-theme-yellow {
+    background-color: #FFC107; /* Yellow */
+    color: #000; /* Black text */
+    border: none;
+}
+
+.btn-theme-yellow:hover {
+    background-color: #FFA000; /* Darker yellow for hover effect */
+}

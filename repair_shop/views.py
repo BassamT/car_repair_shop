@@ -1,7 +1,7 @@
 # repair_shop/views.py
 
 from django.shortcuts import render, redirect, get_object_or_404
-from django.core.mail import send_mail
+from django.core.mail import send_mail, BadHeaderError
 from django.utils.crypto import get_random_string
 from django.utils import timezone
 from django.contrib.auth.views import LoginView
@@ -17,10 +17,12 @@ from .forms import VehicleForm
 from .forms import ServicePartForm
 from .forms import InvoiceForm, InvoiceItemFormSet
 from .forms import CustomerAccessForm
+from .forms import ContactForm
 from django.template.loader import render_to_string
 from django.conf import settings
 from django.contrib import messages
 from datetime import timedelta
+from django import forms
 
 
 
@@ -31,6 +33,48 @@ from datetime import timedelta
 #         context = super().get_context_data(**kwargs)
 #         context['title'] = 'Employee Login'
 #         return context
+
+# Contact Form Definition
+class ContactForm(forms.Form):
+    name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={
+        'class': 'form-control bg-dark text-white border-secondary',
+        'placeholder': 'Your Name'
+    }))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={
+        'class': 'form-control bg-dark text-white border-secondary',
+        'placeholder': 'Your Email'
+    }))
+    message = forms.CharField(widget=forms.Textarea(attrs={
+        'class': 'form-control bg-dark text-white border-secondary',
+        'placeholder': 'Your Message',
+        'rows': 5
+    }))
+
+
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            # Extract form data
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            message_content = form.cleaned_data['message']
+
+            # Send email
+            subject = f'Contact Message from {name}'
+            message = f'Name: {name}\nEmail: {email}\n\nMessage:\n{message_content}'
+            try:
+                send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [settings.DEFAULT_FROM_EMAIL])
+                messages.success(request, 'Your message has been sent successfully!')
+            except Exception as e:
+                messages.error(request, f'Failed to send your message: {e}')
+            return redirect('contact')
+    else:
+        form = ContactForm()
+
+    return render(request, 'repair_shop/contact.html', {'form': form})
+
+
 
 def services(request):
     services = ServicePart.objects.filter(type='Service')
@@ -43,8 +87,7 @@ def invoice_detail(request, invoice_id):
 def home(request):
     return render(request, 'repair_shop/home.html')  # Added home view with correct template path
 
-def contact(request):
-    return render(request, 'repair_shop/contact.html')
+
 
 def location(request):
     return render(request, 'repair_shop/location.html')

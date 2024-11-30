@@ -1,11 +1,43 @@
 <!-- core/templates/core/customer_access.html -->
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}Customer Access - Car Repair Shop{% endblock %}
+
 {% block content %}
-<h2>Access Your Account</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <button type="submit" class="btn btn-primary btn-block">Login</button>
-</form>
+<section class="access-section py-5 text-white" style="background-color: #121212;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card bg-dark shadow-lg border-0 rounded-lg">
+                    <div class="card-body py-5 px-4">
+                        <h3 class="card-title text-center text-yellow mb-4">Access Your Account</h3>
+                        <p class="text-center">Enter your email to receive an access link to your account.</p>
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <div class="form-group mt-4">
+                                <button type="submit" class="btn btn-yellow btn-block">Send Access Link</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .btn-yellow {
+        background-color: #ffc107;
+        color: #121212;
+        border: none;
+    }
+
+    .btn-yellow:hover {
+        background-color: #e0a800;
+        color: #ffffff;
+    }
+</style>
 {% endblock %}

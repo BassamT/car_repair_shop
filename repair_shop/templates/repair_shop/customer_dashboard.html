@@ -1,6 +1,5 @@
 <!-- repair_shop/templates/repair_shop/customer_dashboard.html -->
 {% extends 'base.html' %}
-{% load crispy_forms_tags %}
 {% load static %}
 
 {% block title %}Your Dashboard - Car Repair Shop{% endblock %}
@@ -75,8 +74,8 @@
             {% if vehicles %}
             <div class="row">
                 {% for vehicle in vehicles %}
-                <div class="col-md-6">
-                    <div class="card mb-4">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card h-100">
                         <div class="card-body">
                             <h5 class="card-title">{{ vehicle.make }} {{ vehicle.model }} ({{ vehicle.year }})</h5>
                             <p class="card-text">
@@ -97,132 +96,144 @@
         <div class="tab-pane fade" id="invoices" role="tabpanel">
             <h4>Your Invoices</h4>
             {% if invoices %}
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Invoice ID</th>
-                        <th>Date</th>
-                        <th>Total Amount</th>
-                        <th>Payment Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for invoice in invoices %}
-                    <tr>
-                        <td>{{ invoice.id }}</td>
-                        <td>{{ invoice.invoice_date|date:"Y-m-d" }}</td>
-                        <td>${{ invoice.total_amount }}</td>
-                        <td>{{ invoice.payment_status }}</td>
-                        <td>
-                            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#invoiceModal{{ invoice.id }}">View Details</button>
-                        </td>
-                    </tr>
-
-                    <!-- Invoice Modal -->
-                    <div class="modal fade" id="invoiceModal{{ invoice.id }}" tabindex="-1" role="dialog" aria-labelledby="invoiceModalLabel{{ invoice.id }}" aria-hidden="true">
-                      <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content text-dark">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="invoiceModalLabel{{ invoice.id }}">Invoice #{{ invoice.id }} Details</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <p><strong>Date:</strong> {{ invoice.invoice_date|date:"Y-m-d H:i" }}</p>
-                            <p><strong>Vehicle:</strong> {{ invoice.vehicle }}</p>
-                            <h5>Services and Parts</h5>
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Description</th>
-                                        <th>Quantity</th>
-                                        <th>Unit Price</th>
-                                        <th>Total Price</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for item in invoice.items.all %}
-                                    <tr>
-                                        <td>{{ item.service_part.name }}</td>
-                                        <td>{{ item.quantity }}</td>
-                                        <td>${{ item.unit_price }}</td>
-                                        <td>${{ item.total_price }}</td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                            <h5>Total Amount: ${{ invoice.total_amount }}</h5>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    {% endfor %}
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Invoice ID</th>
+                            <th>Date</th>
+                            <th>Total Amount</th>
+                            <th>Payment Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for invoice in invoices %}
+                        <tr>
+                            <td>{{ invoice.id }}</td>
+                            <td>{{ invoice.invoice_date|date:"Y-m-d" }}</td>
+                            <td>${{ invoice.total_amount }}</td>
+                            <td>{{ invoice.payment_status }}</td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#invoiceModal{{ invoice.id }}">View Details</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
             {% else %}
             <p>You have no invoices.</p>
             {% endif %}
+
+            <!-- Modals -->
+            {% for invoice in invoices %}
+            <!-- Invoice Modal -->
+            <div class="modal fade" id="invoiceModal{{ invoice.id }}" tabindex="-1" role="dialog" aria-labelledby="invoiceModalLabel{{ invoice.id }}" aria-hidden="true">
+              <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content text-dark">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="invoiceModalLabel{{ invoice.id }}">Invoice #{{ invoice.id }} Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p><strong>Date:</strong> {{ invoice.invoice_date|date:"Y-m-d H:i" }}</p>
+                    <p><strong>Vehicle:</strong> {{ invoice.vehicle }}</p>
+                    <h5>Services and Parts</h5>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Quantity</th>
+                                <th>Unit Price</th>
+                                <th>Total Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in invoice.items.all %}
+                            <tr>
+                                <td>{{ item.service_part.name }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>${{ item.unit_price }}</td>
+                                <td>${{ item.total_price }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <h5>Total Amount: ${{ invoice.total_amount }}</h5>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
         </div>
 
         <!-- Appointment Request Tab -->
         <div class="tab-pane fade" id="appointment" role="tabpanel">
             <h4>Request an Appointment</h4>
-            <form method="post" action="{% url 'customer_dashboard' token=token %}">
-                {% csrf_token %}
-                <!-- Hidden field to identify the form -->
-                <input type="hidden" name="appointment_form" value="1">
-                <div class="form-group">
-                    <label for="vehicle">Select Vehicle</label>
-                    <select class="form-control" id="vehicle" name="vehicle">
-                        {% for vehicle in vehicles %}
-                        <option value="{{ vehicle.id }}">{{ vehicle.make }} {{ vehicle.model }} ({{ vehicle.year }})</option>
-                        {% endfor %}
-                    </select>
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <form method="post" action="{% url 'customer_dashboard' token=token %}">
+                        {% csrf_token %}
+                        <!-- Hidden field to identify the form -->
+                        <input type="hidden" name="appointment_form" value="1">
+                        <div class="form-group">
+                            <label for="vehicle">Select Vehicle</label>
+                            <select class="form-control" id="vehicle" name="vehicle">
+                                {% for vehicle in vehicles %}
+                                <option value="{{ vehicle.id }}">{{ vehicle.make }} {{ vehicle.model }} ({{ vehicle.year }})</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="preferred_date">Preferred Date</label>
+                            <input type="date" class="form-control" id="preferred_date" name="preferred_date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="appointment_message">Additional Details</label>
+                            <textarea class="form-control" id="appointment_message" name="message" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success">Submit Request</button>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label for="preferred_date">Preferred Date</label>
-                    <input type="date" class="form-control" id="preferred_date" name="preferred_date" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Additional Details</label>
-                    <textarea class="form-control" id="message" name="message" rows="3"></textarea>
-                </div>
-                <button type="submit" class="btn btn-success">Submit Request</button>
-            </form>
+            </div>
         </div>
 
         <!-- Contact Support Tab -->
         <div class="tab-pane fade" id="support" role="tabpanel">
             <h4>Contact Support</h4>
-            <form method="post" action="{% url 'customer_dashboard' token=token %}">
-                {% csrf_token %}
-                <!-- Hidden field to identify the form -->
-                <input type="hidden" name="support_form" value="1">
-                <div class="form-group">
-                    <label for="subject">Subject</label>
-                    <input type="text" class="form-control" id="subject" name="subject" required>
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <form method="post" action="{% url 'customer_dashboard' token=token %}">
+                        {% csrf_token %}
+                        <!-- Hidden field to identify the form -->
+                        <input type="hidden" name="support_form" value="1">
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" class="form-control" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="support_message">Your Message</label>
+                            <textarea class="form-control" id="support_message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label for="message">Your Message</label>
-                    <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Send Message</button>
-            </form>
+            </div>
         </div>
     </div>
-</div>
+</div> <!-- End of main container -->
+{% endblock %}
 
-<!-- Include jQuery and Bootstrap JS for tabs and modal functionality -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="{% static 'repair_shop/js/bootstrap.bundle.min.js' %}"></script>
-
+{% block extra_js %}
 <script>
-    $(function () {
+    $(document).ready(function () {
+        // Initialize Bootstrap Tabs
         $('#dashboardTab a').on('click', function (e) {
             e.preventDefault();
             $(this).tab('show');
@@ -233,6 +244,12 @@
         if (hash) {
             $('#dashboardTab a[href="' + hash + '"]').tab('show');
         }
+
+        // Ensure modals work correctly
+        $('[data-toggle="modal"]').on('click', function () {
+            var target = $(this).data('target');
+            $(target).modal('show');
+        });
     });
 </script>
 {% endblock %}
