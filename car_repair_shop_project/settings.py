@@ -12,10 +12,32 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from django.utils.translation import gettext_lazy as _
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Enable Internationalization
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
+
+# Define Supported Languages
+LANGUAGE_CODE = 'en'  # Set Arabic as the default language
+
+LANGUAGES = [
+    ('en', 'English'),
+    ('ar', 'العربية'),
+]
+
+TIME_ZONE = 'UTC'
+
+# Define Locale Paths
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -49,6 +71,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -83,6 +106,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.i18n',
             ],
         },
     },
@@ -129,13 +153,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
 
-USE_I18N = True
 
-USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)

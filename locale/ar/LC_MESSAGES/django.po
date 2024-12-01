@@ -1,0 +1,873 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-12-01 14:44+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: repair_shop/templates/base.html:10 repair_shop/templates/base.html:50
+#: repair_shop/templates/base.html:160
+msgid "Car Repair Shop"
+msgstr "ورشة تصليح السيارات"
+
+#: repair_shop/templates/base.html:49
+msgid "Car Repair Shop Logo"
+msgstr "شعار ورشة تصليح السيارات"
+
+#: repair_shop/templates/base.html:52
+msgid "Toggle navigation"
+msgstr "تبديل التنقل"
+
+#: repair_shop/templates/base.html:60
+msgid "Home"
+msgstr "الرئيسية"
+
+#: repair_shop/templates/base.html:65
+msgid "Services"
+msgstr "الخدمات"
+
+#: repair_shop/templates/base.html:70
+#: repair_shop/templates/repair_shop/home.html:16
+msgid "Contact Us"
+msgstr "اتصل بنا"
+
+#: repair_shop/templates/base.html:75
+msgid "Location"
+msgstr "الموقع"
+
+#: repair_shop/templates/base.html:80
+#: repair_shop/templates/repair_shop/home.html:17
+msgid "Customer Access"
+msgstr "وصول العملاء"
+
+#: repair_shop/templates/base.html:88
+msgid "Dashboard"
+msgstr "لوحة التحكم"
+
+#: repair_shop/templates/base.html:92
+msgid "Dashboard Home"
+msgstr "الرئيسية - لوحة التحكم"
+
+#: repair_shop/templates/base.html:95
+#: repair_shop/templates/repair_shop/customer_list.html:9
+#: repair_shop/templates/repair_shop/employee_dashboard.html:16
+msgid "Customers"
+msgstr "العملاء"
+
+#: repair_shop/templates/base.html:98
+#: repair_shop/templates/repair_shop/employee_dashboard.html:26
+msgid "Vehicles"
+msgstr "المركبات"
+
+#: repair_shop/templates/base.html:101
+#: repair_shop/templates/repair_shop/employee_dashboard.html:36
+#: repair_shop/templates/repair_shop/invoice_list.html:9
+msgid "Invoices"
+msgstr "الفواتير"
+
+#: repair_shop/templates/base.html:108
+msgid "Logout"
+msgstr "تسجيل الخروج"
+
+#: repair_shop/templates/base.html:115
+#: repair_shop/templates/repair_shop/employee_login.html:16
+msgid "Employee Login"
+msgstr "تسجيل دخول الموظف"
+
+#: repair_shop/templates/base.html:143
+#: repair_shop/templates/repair_shop/contact.html:44
+#: repair_shop/templates/repair_shop/customer_dashboard.html:17
+#: repair_shop/templates/repair_shop/customer_dashboard.html:138
+#: repair_shop/templates/repair_shop/customer_dashboard.html:169
+msgid "Close"
+msgstr "إغلاق"
+
+#: repair_shop/templates/base.html:160
+msgid "All rights reserved."
+msgstr "جميع الحقوق محفوظة."
+
+#: repair_shop/templates/base.html:162
+msgid "Facebook"
+msgstr "فيسبوك"
+
+#: repair_shop/templates/base.html:163
+msgid "Twitter"
+msgstr "تويتر"
+
+#: repair_shop/templates/base.html:164
+msgid "Instagram"
+msgstr "إنستغرام"
+
+#: repair_shop/templates/repair_shop/access_email_sent.html:7
+msgid "Email Sent - Car Repair Shop"
+msgstr "تم إرسال البريد الإلكتروني - ورشة تصليح السيارات"
+
+#: repair_shop/templates/repair_shop/access_email_sent.html:11
+msgid "Email Sent"
+msgstr "تم إرسال البريد الإلكتروني"
+
+#: repair_shop/templates/repair_shop/access_email_sent.html:13
+#, python-format
+msgid "An access link has been sent to %(email)s."
+msgstr "تم إرسال رابط الوصول إلى %(email)s."
+
+#: repair_shop/templates/repair_shop/access_email_sent.html:14
+msgid "Please check your inbox and click the link to access your dashboard."
+msgstr "يرجى التحقق من بريدك الوارد والنقر على الرابط للوصول إلى لوحة التحكم الخاصة بك."
+
+#: repair_shop/templates/repair_shop/access_expired.html:8
+msgid "Access Link Expired"
+msgstr "انتهت صلاحية رابط الوصول"
+
+#: repair_shop/templates/repair_shop/access_expired.html:9
+msgid "Your access link has expired. Please request a new one."
+msgstr "انتهت صلاحية رابط الوصول الخاص بك. يرجى طلب رابط جديد."
+
+#: repair_shop/templates/repair_shop/access_sent.html:8
+msgid "Access Link Sent"
+msgstr "تم إرسال رابط الوصول"
+
+#: repair_shop/templates/repair_shop/access_sent.html:9
+msgid "An access link has been sent to your email. Please check your inbox."
+msgstr "تم إرسال رابط الوصول إلى بريدك الإلكتروني. يرجى التحقق من بريدك الوارد."
+
+#: repair_shop/templates/repair_shop/add_customer.html:6
+msgid "Add Customer - Car Repair Shop"
+msgstr "إضافة عميل - ورشة تصليح السيارات"
+
+#: repair_shop/templates/repair_shop/add_customer.html:10
+#: repair_shop/templates/repair_shop/employee_dashboard.html:64
+msgid "Add New Customer"
+msgstr "إضافة عميل جديد"
+
+#: repair_shop/templates/repair_shop/add_customer.html:14
+msgid "Save Customer"
+msgstr "حفظ العميل"
+
+#: repair_shop/templates/repair_shop/add_invoice.html:6
+msgid "Create New Invoice - Car Repair Shop"
+msgstr "إنشاء فاتورة جديدة - ورشة تصليح السيارات"
+
+#: repair_shop/templates/repair_shop/add_invoice.html:10
+#: repair_shop/templates/repair_shop/employee_dashboard.html:84
+msgid "Create New Invoice"
+msgstr "إنشاء فاتورة جديدة"
+
+#: repair_shop/templates/repair_shop/add_invoice.html:15
+msgid "Invoice Details"
+msgstr "تفاصيل الفاتورة"
+
+#: repair_shop/templates/repair_shop/add_invoice.html:22
+#: repair_shop/templates/repair_shop/customer_dashboard.html:145
+#: repair_shop/templates/repair_shop/invoice_detail.html:15
+msgid "Services and Parts"
+msgstr "الخدمات والأجزاء"
+
+#: repair_shop/templates/repair_shop/add_invoice.html:29
+#: repair_shop/templates/repair_shop/add_invoice.html:39
+msgid "Remove"
+msgstr "إزالة"
+
+#: repair_shop/templates/repair_shop/add_invoice.html:44
+msgid "Add More Items"
+msgstr "إضافة المزيد من العناصر"
+
+#: repair_shop/templates/repair_shop/add_invoice.html:45
+msgid "Save Invoice"
+msgstr "حفظ الفاتورة"
+
+#: repair_shop/templates/repair_shop/add_service_part.html:6
+msgid "Add New Part/Service - Car Repair Shop"
+msgstr "إضافة جزء/خدمة جديدة - ورشة تصليح السيارات"
+
+#: repair_shop/templates/repair_shop/add_service_part.html:10
+#: repair_shop/templates/repair_shop/service_part_list.html:10
+msgid "Add New Part/Service"
+msgstr "إضافة جزء/خدمة جديدة"
+
+#: repair_shop/templates/repair_shop/add_service_part.html:14
+msgid "Save"
+msgstr "حفظ"
+
+#: repair_shop/templates/repair_shop/add_vehicle.html:6
+msgid "Add Vehicle - Car Repair Shop"
+msgstr "إضافة مركبة - ورشة تصليح السيارات"
+
+#: repair_shop/templates/repair_shop/add_vehicle.html:10
+#: repair_shop/templates/repair_shop/employee_dashboard.html:74
+msgid "Add New Vehicle"
+msgstr "إضافة مركبة جديدة"
+
+#: repair_shop/templates/repair_shop/add_vehicle.html:14
+msgid "Save Vehicle"
+msgstr "حفظ المركبة"
+
+#: repair_shop/templates/repair_shop/contact.html:7
+msgid "Contact Us - Car Repair Shop"
+msgstr "اتصل بنا - ورشة تصليح السيارات"
+
+#: repair_shop/templates/repair_shop/contact.html:12
+msgid "Get in Touch"
+msgstr "ابق على تواصل"
+
+#: repair_shop/templates/repair_shop/contact.html:13
+msgid "We’d love to hear from you. Reach out to us for any inquiries or feedback."
+msgstr "يسعدنا سماعك. تواصل معنا لأي استفسارات أو ملاحظات."
+
+#: repair_shop/templates/repair_shop/contact.html:19
+#: repair_shop/templates/repair_shop/customer_list.html:15
+msgid "Phone"
+msgstr "الهاتف"
+
+#: repair_shop/templates/repair_shop/contact.html:24
+#: repair_shop/templates/repair_shop/customer_list.html:14
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+#: repair_shop/templates/repair_shop/contact.html:29
+#: repair_shop/templates/repair_shop/location.html:23
+msgid "Working Hours"
+msgstr "ساعات العمل"
+
+#: repair_shop/templates/repair_shop/contact.html:30
+#: repair_shop/templates/repair_shop/location.html:24
+msgid "Mon-Fri: 8:00 AM - 6:00 PM"
+msgstr "الإثنين - الجمعة: 8:00 صباحًا - 6:00 مساءً"
+
+#: repair_shop/templates/repair_shop/contact.html:30
+#: repair_shop/templates/repair_shop/location.html:24
+msgid "Sat: 9:00 AM - 3:00 PM"
+msgstr "السبت: 9:00 صباحًا - 3:00 مساءً"
+
+#: repair_shop/templates/repair_shop/contact.html:37
+msgid "Send Us a Message"
+msgstr "أرسل لنا رسالة"
+
+#: repair_shop/templates/repair_shop/contact.html:75
+msgid "Submit"
+msgstr "إرسال"
+
+#: repair_shop/templates/repair_shop/customer_access.html:7
+msgid "Customer Access - Car Repair Shop"
+msgstr "وصول العملاء - ورشة تصليح السيارات"
+
+#: repair_shop/templates/repair_shop/customer_access.html:16
+#: repair_shop/templates/repair_shop/customer_access_request.html:16
+msgid "Access Your Account"
+msgstr "الوصول إلى حسابك"
+
+#: repair_shop/templates/repair_shop/customer_access.html:17
+msgid "Enter your email to receive an access link to your account."
+msgstr "أدخل بريدك الإلكتروني لتلقي رابط الوصول إلى حسابك."
+
+#: repair_shop/templates/repair_shop/customer_access.html:22
+#: repair_shop/templates/repair_shop/customer_access_request.html:22
+msgid "Send Access Link"
+msgstr "إرسال رابط الوصول"
+
+#: repair_shop/templates/repair_shop/customer_access_request.html:7
+msgid "Access Your Account - Car Repair Shop"
+msgstr "الوصول إلى حسابك - ورشة تصليح السيارات"
+
+#: repair_shop/templates/repair_shop/customer_access_request.html:17
+msgid "Enter your email address to receive an access link."
+msgstr "أدخل بريدك الإلكتروني لتلقي رابط الوصول."
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:6
+msgid "Your Dashboard - Car Repair Shop"
+msgstr "لوحة التحكم الخاصة بك - ورشة تصليح السيارات"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:10
+#, python-format
+msgid "Welcome, %(customer.first_name)s!"
+msgstr "مرحبًا، %(customer.first_name)s!"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:28
+msgid "Overview"
+msgstr "نظرة عامة"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:33
+#: repair_shop/templates/repair_shop/customer_dashboard.html:74
+msgid "Your Vehicles"
+msgstr "مركباتك"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:38
+#: repair_shop/templates/repair_shop/customer_dashboard.html:98
+msgid "Your Invoices"
+msgstr "فواتيرك"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:43
+msgid "Request Appointment"
+msgstr "طلب موعد"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:48
+#: repair_shop/templates/repair_shop/customer_dashboard.html:210
+msgid "Contact Support"
+msgstr "تواصل مع الدعم"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:59
+msgid "Your Information"
+msgstr "معلوماتك"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:63
+msgid "Name:"
+msgstr "الاسم:"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:64
+msgid "Email:"
+msgstr "البريد الإلكتروني:"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:65
+msgid "Phone:"
+msgstr "رقم الهاتف:"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:66
+msgid "Address:"
+msgstr "العنوان:"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:81
+#: repair_shop/templates/repair_shop/customer_dashboard.html:190
+#, python-format
+msgid "%(vehicle.make)s %(vehicle.model)s (%(vehicle.year)s)"
+msgstr "%(vehicle.make)s %(vehicle.model)s (%(vehicle.year)s)"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:83
+msgid "VIN:"
+msgstr "رقم التعريف:"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:84
+msgid "License Plate:"
+msgstr "رقم اللوحة:"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:92
+msgid "You have no vehicles registered."
+msgstr "ليس لديك مركبات مسجلة."
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:104
+msgid "Invoice ID"
+msgstr "رقم الفاتورة"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:105
+#: repair_shop/templates/repair_shop/employee_dashboard.html:106
+#: repair_shop/templates/repair_shop/invoice_list.html:15
+msgid "Date"
+msgstr "التاريخ"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:106
+#: repair_shop/templates/repair_shop/invoice_list.html:16
+msgid "Total Amount"
+msgstr "المبلغ الإجمالي"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:107
+msgid "Payment Status"
+msgstr "حالة الدفع"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:108
+#: repair_shop/templates/repair_shop/invoice_list.html:17
+msgid "Actions"
+msgstr "الإجراءات"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:117
+msgid "{{ invoice.payment_status }}"
+msgstr "{{ invoice.payment_status }}"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:119
+msgid "View Details"
+msgstr "عرض التفاصيل"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:127
+msgid "You have no invoices."
+msgstr "ليس لديك فواتير."
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:137
+#, python-format
+msgid "Invoice #%(invoice.id)s Details"
+msgstr "تفاصيل الفاتورة رقم %(invoice.id)s"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:143
+#: repair_shop/templates/repair_shop/invoice_detail.html:10
+msgid "Date:"
+msgstr "التاريخ:"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:144
+#: repair_shop/templates/repair_shop/invoice_detail.html:12
+msgid "Vehicle:"
+msgstr "المركبة:"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:149
+#: repair_shop/templates/repair_shop/invoice_detail.html:19
+#: repair_shop/templates/repair_shop/service_part_list.html:15
+msgid "Description"
+msgstr "الوصف"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:150
+#: repair_shop/templates/repair_shop/invoice_detail.html:20
+msgid "Quantity"
+msgstr "الكمية"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:151
+#: repair_shop/templates/repair_shop/invoice_detail.html:21
+#: repair_shop/templates/repair_shop/service_part_list.html:16
+msgid "Unit Price"
+msgstr "سعر الوحدة"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:152
+#: repair_shop/templates/repair_shop/invoice_detail.html:22
+msgid "Total Price"
+msgstr "السعر الإجمالي"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:166
+#: repair_shop/templates/repair_shop/invoice_detail.html:41
+msgid "Total Amount:"
+msgstr "المبلغ الإجمالي:"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:179
+msgid "Request an Appointment"
+msgstr "طلب موعد"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:187
+msgid "Select Vehicle"
+msgstr "اختر المركبة"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:195
+msgid "Preferred Date"
+msgstr "التاريخ المفضل"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:199
+msgid "Additional Details"
+msgstr "تفاصيل إضافية"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:202
+msgid "Submit Request"
+msgstr "إرسال الطلب"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:218
+msgid "Subject"
+msgstr "الموضوع"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:222
+msgid "Your Message"
+msgstr "رسالتك"
+
+#: repair_shop/templates/repair_shop/customer_dashboard.html:225
+msgid "Send Message"
+msgstr "إرسال الرسالة"
+
+#: repair_shop/templates/repair_shop/customer_list.html:5
+msgid "Customers - Car Repair Shop"
+msgstr "العملاء - ورشة تصليح السيارات"
+
+#: repair_shop/templates/repair_shop/customer_list.html:13
+#: repair_shop/templates/repair_shop/service_part_list.html:14
+msgid "Name"
+msgstr "الاسم"
+
+#: repair_shop/templates/repair_shop/employee_dashboard.html:6
+msgid "Employee Dashboard - Car Repair Shop"
+msgstr "لوحة تحكم الموظف - ورشة تصليح السيارات"
+
+#: repair_shop/templates/repair_shop/employee_dashboard.html:10
+#, python-format
+msgid "Welcome, %(user.first_name)s!"
+msgstr "مرحبًا، %(user.first_name)s!"
+
+#: repair_shop/templates/repair_shop/employee_dashboard.html:19
+msgid "Total Customers"
+msgstr "إجمالي العملاء"
+
+#: repair_shop/templates/repair_shop/employee_dashboard.html:20
+msgid "View Customers"
+msgstr "عرض العملاء"
+
+#: repair_shop/templates/repair_shop/employee_dashboard.html:29
+msgid "Total Vehicles"
+msgstr "إجمالي المركبات"
+
+#: repair_shop/templates/repair_shop/employee_dashboard.html:30
+msgid "View Vehicles"
+msgstr "عرض المركبات"
+
+#: repair_shop/templates/repair_shop/employee_dashboard.html:39
+msgid "Total Invoices"
+msgstr "إجمالي الفواتير"
+
+#: repair_shop/templates/repair_shop/employee_dashboard.html:40
+msgid "View Invoices"
+msgstr "عرض الفواتير"
+
+#: repair_shop/templates/repair_shop/employee_dashboard.html:46
+#: repair_shop/templates/repair_shop/service_part_list.html:9
+msgid "Service Parts"
+msgstr "أجزاء الخدمة"
+
+#: repair_shop/templates/repair_shop/employee_dashboard.html:49
+msgid "Total Parts/Services"
+msgstr "إجمالي الأجزاء/الخدمات"
+
+#: repair_shop/templates/repair_shop/employee_dashboard.html:50
+msgid "View Parts/Services"
+msgstr "عرض الأجزاء/الخدمات"
+
+#: repair_shop/templates/repair_shop/employee_dashboard.html:57
+msgid "Quick Actions"
+msgstr "إجراءات سريعة"
+
+#: repair_shop/templates/repair_shop/employee_dashboard.html:94
+msgid "Create New Part/Service"
+msgstr "إنشاء جزء/خدمة جديدة"
+
+#: repair_shop/templates/repair_shop/employee_dashboard.html:102
+msgid "Recent Activities"
+msgstr "الأنشطة الحديثة"
+
+#: repair_shop/templates/repair_shop/employee_dashboard.html:107
+msgid "Activity"
+msgstr "النشاط"
+
+#: repair_shop/templates/repair_shop/employee_dashboard.html:108
+msgid "Employee"
+msgstr "الموظف"
+
+#: repair_shop/templates/repair_shop/employee_dashboard.html:120
+msgid "No recent activities."
+msgstr "لا توجد أنشطة حديثة."
+
+#: repair_shop/templates/repair_shop/employee_login.html:7
+msgid "Employee Login - Car Repair Shop"
+msgstr "تسجيل دخول الموظف - ورشة تصليح السيارات"
+
+#: repair_shop/templates/repair_shop/employee_login.html:21
+msgid "Login"
+msgstr "تسجيل الدخول"
+
+#: repair_shop/templates/repair_shop/employee_login.html:25
+msgid "Forgot Password?"
+msgstr "نسيت كلمة المرور؟"
+
+#: repair_shop/templates/repair_shop/home.html:12
+msgid "Keeping You on the Road Safely"
+msgstr "نبقيك على الطريق بأمان"
+
+#: repair_shop/templates/repair_shop/home.html:13
+msgid "Your trusted partner for all automotive needs."
+msgstr "شريكك الموثوق لكل احتياجات السيارات."
+
+#: repair_shop/templates/repair_shop/home.html:15
+msgid "View Our Services"
+msgstr "عرض خدماتنا"
+
+#: repair_shop/templates/repair_shop/home.html:25
+#: repair_shop/templates/repair_shop/services.html:12
+msgid "Our Services"
+msgstr "خدماتنا"
+
+#: repair_shop/templates/repair_shop/home.html:30
+#: repair_shop/templates/repair_shop/home.html:32
+#: repair_shop/templates/repair_shop/services.html:19
+#: repair_shop/templates/repair_shop/services.html:21
+msgid "Oil Change"
+msgstr "تغيير الزيت"
+
+#: repair_shop/templates/repair_shop/home.html:33
+#: repair_shop/templates/repair_shop/services.html:22
+msgid ""
+"Ensure your engine runs smoothly with regular oil changes using high-quality "
+"oil."
+msgstr "تأكد من عمل محرك سيارتك بسلاسة من خلال تغيير الزيت بانتظام باستخدام زيت عالي الجودة."
+
+#: repair_shop/templates/repair_shop/home.html:36
+#: repair_shop/templates/repair_shop/home.html:50
+#: repair_shop/templates/repair_shop/home.html:64
+#: repair_shop/templates/repair_shop/services.html:25
+#: repair_shop/templates/repair_shop/services.html:39
+#: repair_shop/templates/repair_shop/services.html:53
+#: repair_shop/templates/repair_shop/services.html:67
+#: repair_shop/templates/repair_shop/services.html:81
+#: repair_shop/templates/repair_shop/services.html:95
+#: repair_shop/templates/repair_shop/services.html:109
+#: repair_shop/templates/repair_shop/services.html:123
+#: repair_shop/templates/repair_shop/services.html:137
+msgid "Learn More"
+msgstr "المزيد"
+
+#: repair_shop/templates/repair_shop/home.html:44
+#: repair_shop/templates/repair_shop/home.html:46
+#: repair_shop/templates/repair_shop/services.html:33
+#: repair_shop/templates/repair_shop/services.html:35
+msgid "Tire Rotation"
+msgstr "تدوير الإطارات"
+
+#: repair_shop/templates/repair_shop/home.html:47
+#: repair_shop/templates/repair_shop/services.html:36
+msgid ""
+"Maximize tire life and improve safety with professional tire rotation "
+"services."
+msgstr "قم بإطالة عمر الإطارات وتحسين الأمان من خلال خدمات تدوير الإطارات الاحترافية."
+
+#: repair_shop/templates/repair_shop/home.html:58
+#: repair_shop/templates/repair_shop/home.html:60
+#: repair_shop/templates/repair_shop/services.html:47
+#: repair_shop/templates/repair_shop/services.html:49
+msgid "Brake Inspection"
+msgstr "فحص الفرامل"
+
+#: repair_shop/templates/repair_shop/home.html:61
+#: repair_shop/templates/repair_shop/services.html:50
+msgid "Stay safe with comprehensive brake inspections and repairs."
+msgstr "ابق آمنًا مع فحوصات الفرامل الشاملة والإصلاحات."
+
+#: repair_shop/templates/repair_shop/invalid_token.html:8
+msgid "Invalid Access Link"
+msgstr "رابط الوصول غير صالح"
+
+#: repair_shop/templates/repair_shop/invalid_token.html:9
+msgid "The access link is invalid. Please check the link or request a new one."
+msgstr "رابط الوصول غير صالح. يرجى التحقق من الرابط أو طلب رابط جديد."
+
+#: repair_shop/templates/repair_shop/invoice_detail.html:5
+#: repair_shop/templates/repair_shop/invoice_detail.html:9
+#: repair_shop/templates/repair_shop/invoice_list.html:13
+msgid "Invoice #"
+msgstr "فاتورة #"
+
+#: repair_shop/templates/repair_shop/invoice_detail.html:5
+msgid " - Car Repair Shop"
+msgstr " - ورشة تصليح السيارات"
+
+#: repair_shop/templates/repair_shop/invoice_detail.html:11
+msgid "Customer:"
+msgstr "العميل:"
+
+#: repair_shop/templates/repair_shop/invoice_detail.html:13
+msgid "Notes:"
+msgstr "ملاحظات:"
+
+#: repair_shop/templates/repair_shop/invoice_detail.html:35
+msgid "No services or parts added to this invoice."
+msgstr "لم يتم إضافة أي خدمات أو قطع إلى هذه الفاتورة."
+
+#: repair_shop/templates/repair_shop/invoice_list.html:5
+msgid "Invoices - Car Repair Shop"
+msgstr "الفواتير - ورشة تصليح السيارات"
+
+#: repair_shop/templates/repair_shop/invoice_list.html:14
+msgid "Customer"
+msgstr "العميل"
+
+#: repair_shop/templates/repair_shop/invoice_list.html:28
+msgid "View"
+msgstr "عرض"
+
+#: repair_shop/templates/repair_shop/invoice_list.html:33
+msgid "No invoices found."
+msgstr "لم يتم العثور على فواتير."
+
+#: repair_shop/templates/repair_shop/location.html:5
+msgid "Location - Car Repair Shop"
+msgstr "الموقع - ورشة تصليح السيارات"
+
+#: repair_shop/templates/repair_shop/location.html:11
+msgid "Our Location"
+msgstr "موقعنا"
+
+#: repair_shop/templates/repair_shop/location.html:12
+msgid ""
+"Visit us at our service center or contact us for assistance. We are here to "
+"help!"
+msgstr "قم بزيارتنا في مركز الخدمة الخاص بنا أو تواصل معنا للحصول على المساعدة. نحن هنا لمساعدتك!"
+
+#: repair_shop/templates/repair_shop/location.html:18
+msgid "Address"
+msgstr "العنوان"
+
+#: repair_shop/templates/repair_shop/location.html:19
+msgid "Main Street, Sabastia, Nablus, Palestine"
+msgstr "شارع الرئيسي، سبسطية، نابلس، فلسطين"
+
+#: repair_shop/templates/repair_shop/location.html:31
+msgid "Find Us Here"
+msgstr "اعثر علينا هنا"
+
+#: repair_shop/templates/repair_shop/password_reset.html:6
+#: repair_shop/templates/repair_shop/password_reset.html:10
+msgid "Password Reset"
+msgstr "إعادة تعيين كلمة المرور"
+
+#: repair_shop/templates/repair_shop/password_reset.html:11
+msgid ""
+"Enter your email address, and we'll send you a link to reset your password."
+msgstr "أدخل بريدك الإلكتروني، وسنرسل لك رابطًا لإعادة تعيين كلمة المرور."
+
+#: repair_shop/templates/repair_shop/password_reset.html:15
+msgid "Reset Password"
+msgstr "إعادة تعيين كلمة المرور"
+
+#: repair_shop/templates/repair_shop/password_reset_complete.html:5
+#: repair_shop/templates/repair_shop/password_reset_complete.html:9
+msgid "Password Reset Complete"
+msgstr "تمت إعادة تعيين كلمة المرور بنجاح"
+
+#: repair_shop/templates/repair_shop/password_reset_complete.html:10
+msgid "Your password has been successfully reset. You can now"
+msgstr "تمت إعادة تعيين كلمة المرور بنجاح. يمكنك الآن"
+
+#: repair_shop/templates/repair_shop/password_reset_complete.html:10
+msgid "log in"
+msgstr "تسجيل الدخول"
+
+#: repair_shop/templates/repair_shop/password_reset_complete.html:10
+msgid "with your new password."
+msgstr "باستخدام كلمة المرور الجديدة."
+
+#: repair_shop/templates/repair_shop/password_reset_confirm.html:6
+#: repair_shop/templates/repair_shop/password_reset_confirm.html:10
+msgid "Set New Password"
+msgstr "تعيين كلمة مرور جديدة"
+
+#: repair_shop/templates/repair_shop/password_reset_confirm.html:14
+msgid "Set Password"
+msgstr "تعيين كلمة المرور"
+
+#: repair_shop/templates/repair_shop/password_reset_done.html:5
+#: repair_shop/templates/repair_shop/password_reset_done.html:9
+msgid "Password Reset Sent"
+msgstr "تم إرسال رابط إعادة تعيين كلمة المرور"
+
+#: repair_shop/templates/repair_shop/password_reset_done.html:10
+msgid "An email has been sent with instructions to reset your password."
+msgstr "تم إرسال بريد إلكتروني يحتوي على تعليمات لإعادة تعيين كلمة المرور."
+
+#: repair_shop/templates/repair_shop/service_part_list.html:5
+msgid "Service Parts - Car Repair Shop"
+msgstr "أجزاء الخدمة - ورشة تصليح السيارات"
+
+#: repair_shop/templates/repair_shop/service_part_list.html:28
+msgid "No service parts found."
+msgstr "لم يتم العثور على أجزاء الخدمة."
+
+#: repair_shop/templates/repair_shop/services.html:7
+msgid "Services - Car Repair Shop"
+msgstr "الخدمات - ورشة تصليح السيارات"
+
+#: repair_shop/templates/repair_shop/services.html:13
+msgid ""
+"Explore our wide range of services tailored to keep your vehicle in top "
+"condition."
+msgstr "استكشف مجموعتنا الواسعة من الخدمات المصممة للحفاظ على سيارتك في أفضل حالة."
+
+#: repair_shop/templates/repair_shop/services.html:61
+#: repair_shop/templates/repair_shop/services.html:63
+msgid "Battery Replacement"
+msgstr "استبدال البطارية"
+
+#: repair_shop/templates/repair_shop/services.html:64
+msgid "Test and replace your car battery to ensure reliable performance."
+msgstr "اختبر واستبدل بطارية سيارتك لضمان أداء موثوق."
+
+#: repair_shop/templates/repair_shop/services.html:75
+#: repair_shop/templates/repair_shop/services.html:77
+msgid "Engine Diagnostics"
+msgstr "تشخيص المحرك"
+
+#: repair_shop/templates/repair_shop/services.html:78
+msgid "Advanced diagnostics to identify and resolve engine issues efficiently."
+msgstr "تشخيص متقدم لتحديد مشاكل المحرك وحلها بكفاءة."
+
+#: repair_shop/templates/repair_shop/services.html:89
+#: repair_shop/templates/repair_shop/services.html:91
+msgid "A/C Maintenance"
+msgstr "صيانة المكيف"
+
+#: repair_shop/templates/repair_shop/services.html:92
+msgid ""
+"Keep your car cool and comfortable with expert air conditioning service."
+msgstr "حافظ على برودة وراحة سيارتك مع خدمات تكييف الهواء الاحترافية."
+
+#: repair_shop/templates/repair_shop/services.html:103
+#: repair_shop/templates/repair_shop/services.html:105
+msgid "Wheel Alignment"
+msgstr "محاذاة العجلات"
+
+#: repair_shop/templates/repair_shop/services.html:106
+msgid "Ensure your vehicle's wheels are perfectly aligned for a smooth ride."
+msgstr "تأكد من أن عجلات سيارتك متوازنة تمامًا للحصول على قيادة سلسة."
+
+#: repair_shop/templates/repair_shop/services.html:117
+#: repair_shop/templates/repair_shop/services.html:119
+msgid "Transmission Service"
+msgstr "خدمة ناقل الحركة"
+
+#: repair_shop/templates/repair_shop/services.html:120
+msgid "Comprehensive transmission repairs to maintain your car's performance."
+msgstr "إصلاح شامل لناقل الحركة للحفاظ على أداء سيارتك."
+
+#: repair_shop/templates/repair_shop/services.html:131
+#: repair_shop/templates/repair_shop/services.html:133
+msgid "Suspension Repairs"
+msgstr "إصلاح التعليق"
+
+#: repair_shop/templates/repair_shop/services.html:134
+msgid "Fix suspension issues for a stable and comfortable driving experience."
+msgstr "إصلاح مشاكل نظام التعليق لضمان قيادة مستقرة ومريحة."
+
+#: repair_shop/templates/repair_shop/token_expired.html:6
+msgid "Link Expired - Car Repair Shop"
+msgstr "انتهت صلاحية الرابط - ورشة تصليح السيارات"
+
+#: repair_shop/templates/repair_shop/token_expired.html:10
+msgid "Link Expired"
+msgstr "انتهت صلاحية الرابط"
+
+#: repair_shop/templates/repair_shop/token_expired.html:12
+msgid "The access link you used has expired. Please request a new link."
+msgstr "انتهت صلاحية رابط الوصول الذي استخدمته. يرجى طلب رابط جديد."
+
+#: repair_shop/templates/repair_shop/token_expired.html:15
+msgid "Request New Link"
+msgstr "طلب رابط جديد"
+
+#: repair_shop/templates/repair_shop/vehicle_list.html:5
+msgid "Vehicle List - Car Repair Shop"
+msgstr "قائمة المركبات - ورشة تصليح السيارات"
+
+#: repair_shop/templates/repair_shop/vehicle_list.html:9
+msgid "Vehicle List"
+msgstr "قائمة المركبات"
+
+#: repair_shop/templates/repair_shop/vehicle_list.html:13
+msgid "License Plate"
+msgstr "رقم اللوحة"
+
+#: repair_shop/templates/repair_shop/vehicle_list.html:14
+msgid "Make"
+msgstr "الصانع"
+
+#: repair_shop/templates/repair_shop/vehicle_list.html:15
+msgid "Model"
+msgstr "الطراز"
+
+#: repair_shop/templates/repair_shop/vehicle_list.html:16
+msgid "Year"
+msgstr "السنة"
+
+#: repair_shop/templates/repair_shop/vehicle_list.html:17
+msgid "Owner"
+msgstr "المالك"
+
+#: repair_shop/templates/repair_shop/vehicle_list.html:31
+msgid "No vehicles found."
+msgstr "لم يتم العثور على مركبات."

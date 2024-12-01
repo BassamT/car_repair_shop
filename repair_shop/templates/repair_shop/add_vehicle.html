@@ -1,16 +1,17 @@
 <!-- repair_shop/templates/repair_shop/add_vehicle.html -->
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load i18n %}  <!-- Load i18n tags -->
 
-{% block title %}Add Vehicle - Car Repair Shop{% endblock %}
+{% block title %}{% trans "Add Vehicle - Car Repair Shop" %}{% endblock %}
 
 {% block content %}
 <div class="container py-5">
-    <h2>Add New Vehicle</h2>
+    <h2>{% trans "Add New Vehicle" %}</h2>
     <form method="post">
         {% csrf_token %}
         {{ form|crispy }}
-        <button type="submit" class="btn btn-success">Save Vehicle</button>
+        <button type="submit" class="btn btn-success">{% trans "Save Vehicle" %}</button>
     </form>
 </div>
 {% endblock %}

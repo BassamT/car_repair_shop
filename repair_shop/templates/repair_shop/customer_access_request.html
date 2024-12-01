@@ -2,8 +2,9 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% load static %}
+{% load i18n %}  <!-- Load i18n tags -->
 
-{% block title %}Access Your Account - Car Repair Shop{% endblock %}
+{% block title %}{% trans "Access Your Account - Car Repair Shop" %}{% endblock %}
 
 {% block content %}
 <section class="access-section py-5 text-white" style="background-color: #121212;">
@@ -12,13 +13,13 @@
             <div class="col-md-6">
                 <div class="card bg-dark shadow-lg border-0 rounded-lg">
                     <div class="card-body py-5 px-4">
-                        <h3 class="card-title text-center text-yellow mb-4">Access Your Account</h3>
-                        <p class="text-center">Enter your email address to receive an access link.</p>
+                        <h3 class="card-title text-center text-yellow mb-4">{% trans "Access Your Account" %}</h3>
+                        <p class="text-center">{% trans "Enter your email address to receive an access link." %}</p>
                         <form method="POST">
                             {% csrf_token %}
                             {{ form|crispy }}
                             <div class="form-group mt-4">
-                                <button type="submit" class="btn btn-yellow btn-block">Send Access Link</button>
+                                <button type="submit" class="btn btn-yellow btn-block">{% trans "Send Access Link" %}</button>
                             </div>
                         </form>
                     </div>

@@ -1,31 +1,34 @@
+<!-- repair_shop/templates/repair_shop/location.html -->
 {% extends 'base.html' %}
-{% block title %}Location - Car Repair Shop{% endblock %}
+{% load i18n %}
+
+{% block title %}{% trans "Location - Car Repair Shop" %}{% endblock %}
 
 {% block content %}
 <!-- Location Section -->
 <section class="location-section py-5 text-white" style="background-color: #121212;">
     <div class="container">
-        <h1 class="text-center mb-4 text-warning">Our Location</h1>
-        <p class="text-center mb-5">Visit us at our service center or contact us for assistance. We are here to help!</p>
+        <h1 class="text-center mb-4 text-warning">{% trans "Our Location" %}</h1>
+        <p class="text-center mb-5">{% trans "Visit us at our service center or contact us for assistance. We are here to help!" %}</p>
         
         <div class="row">
             <!-- Location Info -->
             <div class="col-md-6 text-center mb-4">
                 <i class="fas fa-map-marker-alt fa-3x text-warning mb-3"></i>
-                <h5 class="text-warning">Address</h5>
-                <p>Main Street, Sabastia, Nablus, Palestine</p>
+                <h5 class="text-warning">{% trans "Address" %}</h5>
+                <p>{% trans "Main Street, Sabastia, Nablus, Palestine" %}</p>
             </div>
             <div class="col-md-6 text-center mb-4">
                 <i class="fas fa-clock fa-3x text-warning mb-3"></i>
-                <h5 class="text-warning">Working Hours</h5>
-                <p>Mon-Fri: 8:00 AM - 6:00 PM<br>Sat: 9:00 AM - 3:00 PM</p>
+                <h5 class="text-warning">{% trans "Working Hours" %}</h5>
+                <p>{% trans "Mon-Fri: 8:00 AM - 6:00 PM" %}<br>{% trans "Sat: 9:00 AM - 3:00 PM" %}</p>
             </div>
         </div>
 
         <div class="row mt-5">
             <!-- Google Map -->
             <div class="col-md-12">
-                <h4 class="text-center text-warning">Find Us Here</h4>
+                <h4 class="text-center text-warning">{% trans "Find Us Here" %}</h4>
                 <div class="map-container mt-4">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d819.3172334717706!2d35.19378310308498!3d32.27690540981351!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1732933993262!5m2!1sen!2sus"

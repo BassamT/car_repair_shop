@@ -1,19 +1,20 @@
 <!-- repair_shop/templates/repair_shop/invoice_list.html -->
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Invoices - Car Repair Shop{% endblock %}
+{% block title %}{% trans "Invoices - Car Repair Shop" %}{% endblock %}
 
 {% block content %}
 <div class="container py-5">
-    <h2>Invoices</h2>
+    <h2>{% trans "Invoices" %}</h2>
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Invoice #</th>
-                <th>Customer</th>
-                <th>Date</th>
-                <th>Total Amount</th>
-                <th>Actions</th>
+                <th>{% trans "Invoice #" %}</th>
+                <th>{% trans "Customer" %}</th>
+                <th>{% trans "Date" %}</th>
+                <th>{% trans "Total Amount" %}</th>
+                <th>{% trans "Actions" %}</th>
             </tr>
         </thead>
         <tbody>
@@ -24,12 +25,12 @@
                 <td>{{ invoice.invoice_date|date:"Y-m-d H:i" }}</td>
                 <td>${{ invoice.total_amount }}</td>
                 <td>
-                    <a href="{% url 'invoice_detail' invoice.id %}" class="btn btn-primary btn-sm">View</a>
+                    <a href="{% url 'invoice_detail' invoice.id %}" class="btn btn-primary btn-sm">{% trans "View" %}</a>
                 </td>
             </tr>
             {% empty %}
             <tr>
-                <td colspan="5">No invoices found.</td>
+                <td colspan="5">{% trans "No invoices found." %}</td>
             </tr>
             {% endfor %}
         </tbody>

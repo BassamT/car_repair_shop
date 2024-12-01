@@ -1,32 +1,32 @@
 <!-- repair_shop/templates/repair_shop/add_invoice.html -->
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
-{% load static %}
+{% load i18n %}  <!-- Load i18n tags -->
 
-{% block title %}Create New Invoice - Car Repair Shop{% endblock %}
+{% block title %}{% trans "Create New Invoice - Car Repair Shop" %}{% endblock %}
 
 {% block content %}
 <div class="container py-5">
-    <h2>Create New Invoice</h2>
+    <h2>{% trans "Create New Invoice" %}</h2>
     <form method="post">
         {% csrf_token %}
         <div class="card mb-3">
             <div class="card-header bg-primary text-white">
-                Invoice Details
+                {% trans "Invoice Details" %}
             </div>
             <div class="card-body">
                 {{ form|crispy }}
             </div>
         </div>
 
-        <h3>Services and Parts</h3>
+        <h3>{% trans "Services and Parts" %}</h3>
         <div id="formset">
             {{ formset.management_form }}
             {% for form in formset.forms %}
                 <div class="card mb-3 formset-item">
                     <div class="card-body">
                         {{ form|crispy }}
-                        <button type="button" class="btn btn-danger remove-form mt-2">Remove</button>
+                        <button type="button" class="btn btn-danger remove-form mt-2">{% trans "Remove" %}</button>
                     </div>
                 </div>
             {% endfor %}
@@ -36,13 +36,13 @@
             <div class="card mb-3 formset-item">
                 <div class="card-body">
                     {{ formset.empty_form|crispy }}
-                    <button type="button" class="btn btn-danger remove-form mt-2">Remove</button>
+                    <button type="button" class="btn btn-danger remove-form mt-2">{% trans "Remove" %}</button>
                 </div>
             </div>
         </div>
 
-        <button type="button" class="btn btn-secondary mb-3" id="add-more">Add More Items</button>
-        <button type="submit" class="btn btn-success mb-3">Save Invoice</button>
+        <button type="button" class="btn btn-secondary mb-3" id="add-more">{% trans "Add More Items" %}</button>
+        <button type="submit" class="btn btn-success mb-3">{% trans "Save Invoice" %}</button>
     </form>
 </div>
 

@@ -1,0 +1,53 @@
+/* rtl.css */
+
+/* Set text direction to RTL */
+body {
+    direction: rtl;
+    text-align: right;
+}
+
+/* Adjust navbar alignment */
+.navbar-nav {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+/* Adjust text alignment for certain elements */
+.text-left {
+    text-align: right !important;
+}
+
+.text-right {
+    text-align: left !important;
+}
+
+/* Adjust margin and padding for RTL */
+.mr-2 {
+    margin-left: 0.5rem !important;
+    margin-right: 0 !important;
+}
+
+.ml-auto {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+}
+
+.mx-auto {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* Flip icons if necessary */
+.fa-facebook,
+.fa-twitter,
+.fa-instagram,
+.fa-map-marker-alt,
+.fa-clock,
+.fa-tachometer-alt,
+.fa-users,
+.fa-car,
+.fa-file-invoice-dollar {
+    /* Example: To mirror icons, you might need specific adjustments */
+}
+
+/* Additional RTL-specific styles as needed */

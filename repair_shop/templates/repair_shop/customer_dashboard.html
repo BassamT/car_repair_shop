@@ -1,19 +1,20 @@
 <!-- repair_shop/templates/repair_shop/customer_dashboard.html -->
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}  <!-- Load i18n tags -->
 
-{% block title %}Your Dashboard - Car Repair Shop{% endblock %}
+{% block title %}{% trans "Your Dashboard - Car Repair Shop" %}{% endblock %}
 
 {% block content %}
 <div class="container py-5">
-    <h2 class="mb-4">Welcome, {{ customer.first_name }}!</h2>
-
+    {% blocktrans %}Welcome, {{ customer.first_name }}!{% endblocktrans %}
+    
     <!-- Display Messages -->
     {% if messages %}
         {% for message in messages %}
             <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
                 {{ message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <button type="button" class="close" data-dismiss="alert" aria-label="{% trans 'Close' %}">
                   <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -24,27 +25,27 @@
     <ul class="nav nav-tabs mb-4" id="dashboardTab" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" id="overview-tab" data-toggle="tab" href="#overview" role="tab">
-                <i class="fas fa-user"></i> Overview
+                <i class="fas fa-user"></i> {% trans "Overview" %}
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="vehicles-tab" data-toggle="tab" href="#vehicles" role="tab">
-                <i class="fas fa-car"></i> Your Vehicles
+                <i class="fas fa-car"></i> {% trans "Your Vehicles" %}
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="invoices-tab" data-toggle="tab" href="#invoices" role="tab">
-                <i class="fas fa-file-invoice-dollar"></i> Your Invoices
+                <i class="fas fa-file-invoice-dollar"></i> {% trans "Your Invoices" %}
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="appointment-tab" data-toggle="tab" href="#appointment" role="tab">
-                <i class="fas fa-calendar-check"></i> Request Appointment
+                <i class="fas fa-calendar-check"></i> {% trans "Request Appointment" %}
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="support-tab" data-toggle="tab" href="#support" role="tab">
-                <i class="fas fa-headset"></i> Contact Support
+                <i class="fas fa-headset"></i> {% trans "Contact Support" %}
             </a>
         </li>
     </ul>
@@ -55,14 +56,14 @@
             <!-- Customer Information -->
             <div class="card mb-4">
                 <div class="card-header">
-                    Your Information
+                    {% trans "Your Information" %}
                 </div>
                 <div class="card-body">
                     <p>
-                        <strong>Name:</strong> {{ customer.first_name }} {{ customer.last_name }}<br>
-                        <strong>Email:</strong> {{ customer.email }}<br>
-                        <strong>Phone:</strong> {{ customer.phone_number }}<br>
-                        <strong>Address:</strong> {{ customer.address }}
+                        <strong>{% trans "Name:" %}</strong> {{ customer.first_name }} {{ customer.last_name }}<br>
+                        <strong>{% trans "Email:" %}</strong> {{ customer.email }}<br>
+                        <strong>{% trans "Phone:" %}</strong> {{ customer.phone_number }}<br>
+                        <strong>{% trans "Address:" %}</strong> {{ customer.address }}
                     </p>
                 </div>
             </div>
@@ -70,17 +71,17 @@
 
         <!-- Vehicles Tab -->
         <div class="tab-pane fade" id="vehicles" role="tabpanel">
-            <h4>Your Vehicles</h4>
+            <h4>{% trans "Your Vehicles" %}</h4>
             {% if vehicles %}
             <div class="row">
                 {% for vehicle in vehicles %}
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card h-100">
                         <div class="card-body">
-                            <h5 class="card-title">{{ vehicle.make }} {{ vehicle.model }} ({{ vehicle.year }})</h5>
+                            <h5 class="card-title">{% blocktrans %}{{ vehicle.make }} {{ vehicle.model }} ({{ vehicle.year }}){% endblocktrans %}</h5>
                             <p class="card-text">
-                                <strong>VIN:</strong> {{ vehicle.vin }}<br>
-                                <strong>License Plate:</strong> {{ vehicle.license_plate }}
+                                <strong>{% trans "VIN:" %}</strong> {{ vehicle.vin }}<br>
+                                <strong>{% trans "License Plate:" %}</strong> {{ vehicle.license_plate }}
                             </p>
                         </div>
                     </div>
@@ -88,23 +89,23 @@
                 {% endfor %}
             </div>
             {% else %}
-            <p>You have no vehicles registered.</p>
+            <p>{% trans "You have no vehicles registered." %}</p>
             {% endif %}
         </div>
 
         <!-- Invoices Tab -->
         <div class="tab-pane fade" id="invoices" role="tabpanel">
-            <h4>Your Invoices</h4>
+            <h4>{% trans "Your Invoices" %}</h4>
             {% if invoices %}
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>Invoice ID</th>
-                            <th>Date</th>
-                            <th>Total Amount</th>
-                            <th>Payment Status</th>
-                            <th>Actions</th>
+                            <th>{% trans "Invoice ID" %}</th>
+                            <th>{% trans "Date" %}</th>
+                            <th>{% trans "Total Amount" %}</th>
+                            <th>{% trans "Payment Status" %}</th>
+                            <th>{% trans "Actions" %}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -113,9 +114,9 @@
                             <td>{{ invoice.id }}</td>
                             <td>{{ invoice.invoice_date|date:"Y-m-d" }}</td>
                             <td>${{ invoice.total_amount }}</td>
-                            <td>{{ invoice.payment_status }}</td>
+                            <td>{% trans "{{ invoice.payment_status }}" %}</td>
                             <td>
-                                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#invoiceModal{{ invoice.id }}">View Details</button>
+                                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#invoiceModal{{ invoice.id }}">{% trans "View Details" %}</button>
                             </td>
                         </tr>
                         {% endfor %}
@@ -123,7 +124,7 @@
                 </table>
             </div>
             {% else %}
-            <p>You have no invoices.</p>
+            <p>{% trans "You have no invoices." %}</p>
             {% endif %}
 
             <!-- Modals -->
@@ -133,22 +134,22 @@
               <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content text-dark">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="invoiceModalLabel{{ invoice.id }}">Invoice #{{ invoice.id }} Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <h5 class="modal-title" id="invoiceModalLabel{{ invoice.id }}">{% blocktrans %}Invoice #{{ invoice.id }} Details{% endblocktrans %}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="{% trans 'Close' %}">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
                   <div class="modal-body">
-                    <p><strong>Date:</strong> {{ invoice.invoice_date|date:"Y-m-d H:i" }}</p>
-                    <p><strong>Vehicle:</strong> {{ invoice.vehicle }}</p>
-                    <h5>Services and Parts</h5>
+                    <p><strong>{% trans "Date:" %}</strong> {{ invoice.invoice_date|date:"Y-m-d H:i" }}</p>
+                    <p><strong>{% trans "Vehicle:" %}</strong> {{ invoice.vehicle }}</p>
+                    <h5>{% trans "Services and Parts" %}</h5>
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Description</th>
-                                <th>Quantity</th>
-                                <th>Unit Price</th>
-                                <th>Total Price</th>
+                                <th>{% trans "Description" %}</th>
+                                <th>{% trans "Quantity" %}</th>
+                                <th>{% trans "Unit Price" %}</th>
+                                <th>{% trans "Total Price" %}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -162,10 +163,10 @@
                             {% endfor %}
                         </tbody>
                     </table>
-                    <h5>Total Amount: ${{ invoice.total_amount }}</h5>
+                    <h5>{% trans "Total Amount:" %} ${{ invoice.total_amount }}</h5>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans "Close" %}</button>
                   </div>
                 </div>
               </div>
@@ -175,7 +176,7 @@
 
         <!-- Appointment Request Tab -->
         <div class="tab-pane fade" id="appointment" role="tabpanel">
-            <h4>Request an Appointment</h4>
+            <h4>{% trans "Request an Appointment" %}</h4>
             <div class="row">
                 <div class="col-md-8 offset-md-2">
                     <form method="post" action="{% url 'customer_dashboard' token=token %}">
@@ -183,22 +184,22 @@
                         <!-- Hidden field to identify the form -->
                         <input type="hidden" name="appointment_form" value="1">
                         <div class="form-group">
-                            <label for="vehicle">Select Vehicle</label>
+                            <label for="vehicle">{% trans "Select Vehicle" %}</label>
                             <select class="form-control" id="vehicle" name="vehicle">
                                 {% for vehicle in vehicles %}
-                                <option value="{{ vehicle.id }}">{{ vehicle.make }} {{ vehicle.model }} ({{ vehicle.year }})</option>
+                                <option value="{{ vehicle.id }}">{% blocktrans %}{{ vehicle.make }} {{ vehicle.model }} ({{ vehicle.year }}){% endblocktrans %}</option>
                                 {% endfor %}
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="preferred_date">Preferred Date</label>
+                            <label for="preferred_date">{% trans "Preferred Date" %}</label>
                             <input type="date" class="form-control" id="preferred_date" name="preferred_date" required>
                         </div>
                         <div class="form-group">
-                            <label for="appointment_message">Additional Details</label>
+                            <label for="appointment_message">{% trans "Additional Details" %}</label>
                             <textarea class="form-control" id="appointment_message" name="message" rows="3"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-success">Submit Request</button>
+                        <button type="submit" class="btn btn-success">{% trans "Submit Request" %}</button>
                     </form>
                 </div>
             </div>
@@ -206,7 +207,7 @@
 
         <!-- Contact Support Tab -->
         <div class="tab-pane fade" id="support" role="tabpanel">
-            <h4>Contact Support</h4>
+            <h4>{% trans "Contact Support" %}</h4>
             <div class="row">
                 <div class="col-md-8 offset-md-2">
                     <form method="post" action="{% url 'customer_dashboard' token=token %}">
@@ -214,14 +215,14 @@
                         <!-- Hidden field to identify the form -->
                         <input type="hidden" name="support_form" value="1">
                         <div class="form-group">
-                            <label for="subject">Subject</label>
+                            <label for="subject">{% trans "Subject" %}</label>
                             <input type="text" class="form-control" id="subject" name="subject" required>
                         </div>
                         <div class="form-group">
-                            <label for="support_message">Your Message</label>
+                            <label for="support_message">{% trans "Your Message" %}</label>
                             <textarea class="form-control" id="support_message" name="message" rows="5" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
+                        <button type="submit" class="btn btn-primary">{% trans "Send Message" %}</button>
                     </form>
                 </div>
             </div>

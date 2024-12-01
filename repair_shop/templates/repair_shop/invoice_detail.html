@@ -1,24 +1,25 @@
 <!-- repair_shop/templates/repair_shop/invoice_detail.html -->
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Invoice #{{ invoice.id }} - Car Repair Shop{% endblock %}
+{% block title %}{% trans "Invoice #" %}{{ invoice.id }}{% trans " - Car Repair Shop" %}{% endblock %}
 
 {% block content %}
 <div class="container py-5">
-    <h2>Invoice #{{ invoice.id }}</h2>
-    <p><strong>Date:</strong> {{ invoice.invoice_date|date:"Y-m-d H:i" }}</p>
-    <p><strong>Customer:</strong> {{ invoice.customer.get_full_name }}</p>
-    <p><strong>Vehicle:</strong> {{ invoice.vehicle }}</p>
-    <p><strong>Notes:</strong> {{ invoice.notes|default:"None" }}</p>
+    <h2>{% trans "Invoice #" %}{{ invoice.id }}</h2>
+    <p><strong>{% trans "Date:" %}</strong> {{ invoice.invoice_date|date:"Y-m-d H:i" }}</p>
+    <p><strong>{% trans "Customer:" %}</strong> {{ invoice.customer.get_full_name }}</p>
+    <p><strong>{% trans "Vehicle:" %}</strong> {{ invoice.vehicle }}</p>
+    <p><strong>{% trans "Notes:" %}</strong> {{ invoice.notes|default:"{% trans 'None' %}" }}</p>
 
-    <h3>Services and Parts</h3>
+    <h3>{% trans "Services and Parts" %}</h3>
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Description</th>
-                <th>Quantity</th>
-                <th>Unit Price</th>
-                <th>Total Price</th>
+                <th>{% trans "Description" %}</th>
+                <th>{% trans "Quantity" %}</th>
+                <th>{% trans "Unit Price" %}</th>
+                <th>{% trans "Total Price" %}</th>
             </tr>
         </thead>
         <tbody>
@@ -31,12 +32,12 @@
             </tr>
             {% empty %}
             <tr>
-                <td colspan="4">No services or parts added to this invoice.</td>
+                <td colspan="4">{% trans "No services or parts added to this invoice." %}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <h4>Total Amount: ${{ invoice.total_amount }}</h4>
+    <h4>{% trans "Total Amount:" %} ${{ invoice.total_amount }}</h4>
 </div>
 {% endblock %}

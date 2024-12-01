@@ -1,8 +1,11 @@
 <!-- core/templates/core/access_sent.html -->
 {% extends 'base.html' %}
-{% block content %}
 {% load crispy_forms_tags %}
+{% load i18n %}  <!-- Load i18n tags -->
 
-<h2>Access Link Sent</h2>
-<p>An access link has been sent to your email. Please check your inbox.</p>
+{% block content %}
+<div class="container py-5">
+    <h2>{% trans "Access Link Sent" %}</h2>
+    <p>{% trans "An access link has been sent to your email. Please check your inbox." %}</p>
+</div>
 {% endblock %}

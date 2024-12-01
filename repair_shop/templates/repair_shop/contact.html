@@ -1,45 +1,47 @@
+<!-- repair_shop/templates/repair_shop/contact.html -->
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% load static %}
+{% load i18n %}  <!-- Load i18n tags -->
 
-{% block title %}Contact Us - Car Repair Shop{% endblock %}
+{% block title %}{% trans "Contact Us - Car Repair Shop" %}{% endblock %}
 
 {% block content %}
 <section class="contact-section py-5 text-white" style="background-color: #121212;">
   <div class="container">
-    <h1 class="text-center mb-4">Get in Touch</h1>
-    <p class="text-center mb-5">We’d love to hear from you. Reach out to us for any inquiries or feedback.</p>
+    <h1 class="text-center mb-4">{% trans "Get in Touch" %}</h1>
+    <p class="text-center mb-5">{% trans "We’d love to hear from you. Reach out to us for any inquiries or feedback." %}</p>
     
     <div class="row">
       <!-- Contact Information -->
       <div class="col-md-4 text-center mb-4">
-        <i class="fas fa-phone fa-3x text-warning mb-3"></i>
-        <h5>Phone</h5>
+        <i class="fas fa-phone fa-3x text-warning mb-3" aria-hidden="true"></i>
+        <h5>{% trans "Phone" %}</h5>
         <p>+970 (059) 123-4567</p>
       </div>
       <div class="col-md-4 text-center mb-4">
-        <i class="fas fa-envelope fa-3x text-warning mb-3"></i>
-        <h5>Email</h5>
+        <i class="fas fa-envelope fa-3x text-warning mb-3" aria-hidden="true"></i>
+        <h5>{% trans "Email" %}</h5>
         <p>support@carrepairshop.com</p>
       </div>
       <div class="col-md-4 text-center mb-4">
-        <i class="fas fa-clock fa-3x text-warning mb-3"></i>
-        <h5>Working Hours</h5>
-        <p>Mon-Fri: 8:00 AM - 6:00 PM<br>Sat: 9:00 AM - 3:00 PM</p>
+        <i class="fas fa-clock fa-3x text-warning mb-3" aria-hidden="true"></i>
+        <h5>{% trans "Working Hours" %}</h5>
+        <p>{% trans "Mon-Fri: 8:00 AM - 6:00 PM" %}<br>{% trans "Sat: 9:00 AM - 3:00 PM" %}</p>
       </div>
     </div>
 
     <div class="row mt-5">
       <!-- Contact Form -->
       <div class="col-md-8 mx-auto">
-        <h4 class="text-center mb-4">Send Us a Message</h4>
+        <h4 class="text-center mb-4">{% trans "Send Us a Message" %}</h4>
 
         <!-- Display Messages -->
         {% if messages %}
             {% for message in messages %}
                 <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
                     {{ message }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="{% trans 'Close' %}">
                       <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -70,7 +72,7 @@
                 <span class="text-danger">{{ error }}</span>
             {% endfor %}
           </div>
-          <button type="submit" class="btn btn-warning btn-block">Submit</button>
+          <button type="submit" class="btn btn-warning btn-block">{% trans "Submit" %}</button>
         </form>
       </div>
     </div>

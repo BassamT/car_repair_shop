@@ -1,8 +1,11 @@
 <!-- core/templates/core/access_expired.html -->
 {% extends 'base.html' %}
-{% block content %}
 {% load crispy_forms_tags %}
+{% load i18n %}  <!-- Load i18n tags -->
 
-<h2>Access Link Expired</h2>
-<p>Your access link has expired. Please request a new one.</p>
+{% block content %}
+<div class="container py-5">
+    <h2>{% trans "Access Link Expired" %}</h2>
+    <p>{% trans "Your access link has expired. Please request a new one." %}</p>
+</div>
 {% endblock %}
