@@ -50,7 +50,7 @@ SECRET_KEY = 'django-insecure-fgo^%7^23!j)2v@d2b73wki0!hxrxo6hjbclk2zq$gd#mg=u$w
 DEBUG = True
 
 HOST_IP_ADDRESS = os.environ.get('HOST_IP_ADDRESS', '127.0.0.1')
-ALLOWED_HOSTS = ['192.168.0.4', 'localhost', '0.0.0.0', '127.0.0.1']
+ALLOWED_HOSTS = ['192.168.0.4', 'localhost', '0.0.0.0', '127.0.0.1', HOST_IP_ADDRESS]
 
 AUTH_USER_MODEL = 'repair_shop.Employee'
 
@@ -86,7 +86,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'bassamtuffaha333@gmail.com'
-EMAIL_HOST_PASSWORD = 'duhj biah hdyh pqwq'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = True  # Use TLS for secure connection
 DEFAULT_FROM_EMAIL = 'Car Repair Shop <noreply@carrepairshop.com>'
 SHOP_EMAIL = 'bassamtuffaha333@gmail.com'
