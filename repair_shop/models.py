@@ -35,6 +35,7 @@ class Vehicle(models.Model):
     year = models.IntegerField()
     vin = models.CharField(max_length=17, unique=True)
     license_plate = models.CharField(max_length=15)
+    public_token = models.UUIDField(default=uuid.uuid4, unique=True)
 
     def __str__(self):
         return f"{self.make} {self.model} ({self.license_plate})"
@@ -87,6 +88,7 @@ class Invoice(models.Model):
     total_amount = models.DecimalField(max_digits=10, decimal_places=2, default=Decimal('0.00'))
     payment_status = models.CharField(max_length=15, choices=PAYMENT_STATUS_CHOICES, default=UNPAID)
     notes = models.TextField(blank=True, null=True)
+    date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return f"Invoice #{self.id} - {self.customer}"

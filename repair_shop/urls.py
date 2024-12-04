@@ -68,8 +68,13 @@ urlpatterns = [
     path('customer/dashboard/<str:token>/appointment/', views.customer_dashboard, name='request_appointment'),
     path('customer/dashboard/<str:token>/support/', views.customer_dashboard, name='contact_support'),
 
-
+    path('vehicles/', views.vehicle_list, name='vehicle_list'),
     
+    path('invoices/<int:pk>/', views.invoice_detail, name='invoice_detail'),
+
+    path('vehicles/<uuid:token>/qr_code/download/', views.vehicle_qr_code_download, name='vehicle_qr_code_download'),
+    path('vehicles/<uuid:token>/history/', views.vehicle_history, name='vehicle_history'),
+
 
     # Additional URL patterns for other views
     # Example:

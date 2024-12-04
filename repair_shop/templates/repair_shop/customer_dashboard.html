@@ -78,7 +78,7 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card h-100">
                         <div class="card-body">
-                            <h5 class="card-title">{% blocktrans %}{{ vehicle.make }} {{ vehicle.model }} ({{ vehicle.year }}){% endblocktrans %}</h5>
+                            <h5 class="card-title">{{ vehicle.make }} {{ vehicle.model }} ({{ vehicle.year }})</h5>
                             <p class="card-text">
                                 <strong>{% trans "VIN:" %}</strong> {{ vehicle.vin }}<br>
                                 <strong>{% trans "License Plate:" %}</strong> {{ vehicle.license_plate }}
@@ -114,7 +114,7 @@
                             <td>{{ invoice.id }}</td>
                             <td>{{ invoice.invoice_date|date:"Y-m-d" }}</td>
                             <td>${{ invoice.total_amount }}</td>
-                            <td>{% trans "{{ invoice.payment_status }}" %}</td>
+                            <td>{{ invoice.payment_status }}</td>
                             <td>
                                 <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#invoiceModal{{ invoice.id }}">{% trans "View Details" %}</button>
                             </td>

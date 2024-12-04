@@ -10,7 +10,7 @@
     <p><strong>{% trans "Date:" %}</strong> {{ invoice.invoice_date|date:"Y-m-d H:i" }}</p>
     <p><strong>{% trans "Customer:" %}</strong> {{ invoice.customer.get_full_name }}</p>
     <p><strong>{% trans "Vehicle:" %}</strong> {{ invoice.vehicle }}</p>
-    <p><strong>{% trans "Notes:" %}</strong> {{ invoice.notes|default:"{% trans 'None' %}" }}</p>
+    <p><strong>{% trans "Notes:" %}</strong> {{ invoice.notes|default:"None" }}</p>
 
     <h3>{% trans "Services and Parts" %}</h3>
     <table class="table table-striped">

@@ -23,6 +23,13 @@ from django.conf import settings
 from django.contrib import messages
 from datetime import timedelta
 from django import forms
+import qrcode
+from io import BytesIO
+from django.http import HttpResponse
+import qrcode.image.svg
+import io
+import socket
+
 
 
 
@@ -388,3 +395,58 @@ def add_service_part(request):
 def service_part_list(request):
     service_parts = ServicePart.objects.all()
     return render(request, 'repair_shop/service_part_list.html', {'service_parts': service_parts})
+
+
+
+
+# def get_local_ip_address():
+#     """Returns the local IP address that matches common private IP ranges."""
+#     for interface_name, interface_addresses in psutil.net_if_addrs().items():
+#         for address in interface_addresses:
+#             if address.family == psutil.AddressFamily.AF_INET:
+#                 ip = address.address
+#                 if ip.startswith('192.168.') or ip.startswith('10.') or ip.startswith('172.16.'):
+#                     return ip
+#     return '127.0.0.1'
+
+
+
+def vehicle_qr_code_download(request, token):
+    vehicle = get_object_or_404(Vehicle, public_token=token)
+    host_ip = settings.HOST_IP_ADDRESS
+    port = '8000'  # Update if you're using a different port
+
+    # Build the URL using the host IP and port
+    vehicle_url = f"http://{host_ip}:{port}{reverse('vehicle_history', args=[vehicle.public_token])}"
+
+    # Generate QR code image
+    qr = qrcode.QRCode(
+        version=1,
+        box_size=10,
+        border=5
+    )
+    qr.add_data(vehicle_url)
+    qr.make(fit=True)
+
+    img = qr.make_image(fill_color='black', back_color='white')
+
+    # Save the image to a bytes buffer
+    buffer = io.BytesIO()
+    img.save(buffer, format='PNG')
+    buffer.seek(0)
+
+    # Prepare the response with the image for download
+    response = HttpResponse(buffer, content_type='image/png')
+    response['Content-Disposition'] = f'attachment; filename="vehicle_{vehicle.license_plate}_qr_code.png"'
+    return response
+
+
+def vehicle_history(request, token):
+    vehicle = get_object_or_404(Vehicle, public_token=token)
+    invoices = Invoice.objects.filter(vehicle=vehicle).order_by('-date')
+
+    context = {
+        'vehicle': vehicle,
+        'invoices': invoices,
+    }
+    return render(request, 'repair_shop/vehicle_history.html', context)

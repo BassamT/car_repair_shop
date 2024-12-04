@@ -49,7 +49,8 @@ SECRET_KEY = 'django-insecure-fgo^%7^23!j)2v@d2b73wki0!hxrxo6hjbclk2zq$gd#mg=u$w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.4', 'localhost']
+HOST_IP_ADDRESS = os.environ.get('HOST_IP_ADDRESS', '127.0.0.1')
+ALLOWED_HOSTS = ['192.168.0.4', 'localhost', '0.0.0.0', '127.0.0.1']
 
 AUTH_USER_MODEL = 'repair_shop.Employee'
 
